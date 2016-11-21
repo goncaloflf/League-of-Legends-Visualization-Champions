@@ -33,6 +33,7 @@ tr {
 }
 
 #champSelLeft {
+	position: absolute;
 	width: 80%;
 	height: 100%;
 }
@@ -77,6 +78,45 @@ tr {
     height: 75px;
     border-radius: 37.5px;
 	background: green;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 75px;
+}
+
+#jungleCircle {
+	position: relative;
+	    top: -218px;
+	    left: 250px;
+    width: 75px;
+    height: 75px;
+    border-radius: 37.5px;
+	background: yellow;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 75px;
+}
+
+#midCircle {
+	position: relative;
+    top: -167px;
+    left: 215px;
+	width: 75px;
+	height: 75px;
+	border-radius: 37.5px;
+	background: purple;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 75px;
+}
+
+#topCircle {
+	position: relative;
+    top: -368px;
+    left: 37px;
+    width: 75px;
+    height: 75px;
+    border-radius: 37.5px;
+	background: orange;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 75px;
