@@ -1,3 +1,7 @@
+* {
+	font-family: "Arial";
+}
+
 table{
 	position: absolute;
     top: 50%;
@@ -30,7 +34,6 @@ tr {
 
 #champSelLeft {
 	width: 80%;
-	background-color: red;
 	height: 100%;
 }
 
@@ -38,6 +41,47 @@ tr {
 	width: 100%;
 	height: 100%;
 }
+
+#championsCircle {
+	position: relative;
+    top: 158.15px;
+    left: 180.8px;
+    transform: translateX(-50%) translateY(-50%);
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+	background: red;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 150px;
+}
+
+#supportCircle {
+	position: relative;
+    top: 60px;
+    left: 75px;
+    width: 75px;
+    height: 75px;
+    border-radius: 37.5px;
+	background: blue;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 75px;
+}
+
+#adcCircle {
+	position: relative;
+    top: -218px;
+    left: 145px;
+    width: 75px;
+    height: 75px;
+    border-radius: 37.5px;
+	background: green;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 75px;
+}
+
 
 
 
