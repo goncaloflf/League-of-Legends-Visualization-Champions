@@ -1,9 +1,11 @@
 <html>
 
   <head>
+   <meta charset="UTF-8"> 
    <title>League of Legends' Stuff</title>
    <link rel="stylesheet" href="style.css">   
    <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
    <script src="lol.js"></script>   
   </head>
 
@@ -13,12 +15,15 @@
           <td>
             <div class="container">
               <div id="champSelLeft">
-                <div onclick="highlight(this)" id="championsCircle">Champions</div>
-                <div onclick="highlight(this)" id="supportCircle">Support</div>
-                <div onclick="highlight(this)" id="adcCircle">ADC</div>
-                <div onclick="highlight(this)" id="jungleCircle">Jungle</div>
-                <div onclick="highlight(this)" id="midCircle">Mid</div>
-                <div onclick="highlight(this)" id="topCircle">Top</div>
+                <div onclick="clickChamps()" id="championsCircle">Champions</div>
+                <div onclick="highlight(this)" id="supportCircle" class="hidden">Support</div>
+                <div onclick="highlight(this)" id="adcCircle" class="hidden">ADC</div>
+                <div onclick="highlight(this)" id="jungleCircle" class="hidden">Jungle</div>
+                <div onclick="highlight(this)" id="midCircle" class="hidden">Mid</div>
+                <div onclick="highlight(this)" id="topCircle" class="hidden">Top</div>
+              </div>
+
+              <div id="champSelRight">
 
               </div>
 
