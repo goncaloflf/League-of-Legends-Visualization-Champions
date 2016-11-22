@@ -22,6 +22,36 @@ td{
     table-layout: fixed;
 }
 
+ul {
+	font-size: 13px;
+	list-style-type:none;
+	text-align: left;
+	margin: 0;
+    padding: 0;
+}
+
+li {
+	border-bottom: 1px solid #ccc;
+}
+
+li a{
+	text-decoration: none;
+	color: #000;
+	display: block;
+	width: 200px;
+
+	-webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+	-moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+	-o-transition: font-size 0.3s ease, background-color 0.3s ease;
+	-ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+	transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+
+li a:hover {
+  font-size: 20px;
+  background: #f6f6f6;
+}
+
 
 body {
     margin: 0px;
@@ -29,18 +59,29 @@ body {
 }
 
 tr {
-	height: 316.5;
+	height: 316.5px;
 }
 
+
+
 #champSelLeft {
-	position: absolute;
+	position: relative;
 	width: 80%;
 	height: 100%;
 }
 
-.container {	
-	width: 100%;
+#champSelRight {
+	position: relative;
+	top: -316px;
+	left: 343.6px;
+	width: 24%;
 	height: 100%;
+	overflow-y: scroll;
+}
+
+.container {	
+	width: 452px;
+	height: 316.3px;
 }
 
 #championsCircle {

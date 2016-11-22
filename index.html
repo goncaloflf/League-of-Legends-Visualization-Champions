@@ -16,15 +16,148 @@
             <div class="container">
               <div id="champSelLeft">
                 <div onclick="clickChamps()" id="championsCircle">Champions</div>
-                <div onclick="highlight(this)" id="supportCircle" class="hidden">Support</div>
-                <div onclick="highlight(this)" id="adcCircle" class="hidden">ADC</div>
-                <div onclick="highlight(this)" id="jungleCircle" class="hidden">Jungle</div>
-                <div onclick="highlight(this)" id="midCircle" class="hidden">Mid</div>
-                <div onclick="highlight(this)" id="topCircle" class="hidden">Top</div>
+                <div onclick="clickCircles(this)" id="supportCircle" class="hidden">Support</div>
+                <div onclick="clickCircles(this)" id="adcCircle" class="hidden">ADC</div>
+                <div onclick="clickCircles(this)" id="jungleCircle" class="hidden">Jungle</div>
+                <div onclick="clickCircles(this)" id="midCircle" class="hidden">Mid</div>
+                <div onclick="clickCircles(this)" id="topCircle" class="hidden">Top</div>
               </div>
 
               <div id="champSelRight">
-
+                <ul id="championsList">
+                  <li><a onclick="highlightClickList(this)" href="#">Aatrox</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Ahri</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Akali</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Alistar</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Amumu</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Anivia</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Annie</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Ashe</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Azir</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Aurelion Sol</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Bard</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Blitzcrank</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Brand</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Braum</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Caitlyn</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Cassiopeia</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Cho'Gath</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Corki</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Darius</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Diana</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Dr. Mundo</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Draven</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Ekko</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Elise</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Evelynn</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Ezreal</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Fiddlesticks</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Fiora</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Fizz</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Galio</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Gangplank</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Garen</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Gnar</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Gragas</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Hecarim</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Heimerdinger</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Illaoi</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Irelia</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Ivern</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Janna</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Jarvan IV</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Jax</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Jayce</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Jhin</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Jinx</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Kalista</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Karma</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Karthus</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Kassadin</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Katarina</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Kayle</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Kennen</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Kha'Zix</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Kindred</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Kled</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Kog'Maw</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">LeBlanc</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Lee Sin</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Leona</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Lissandra</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Lucian</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Lulu</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Lux</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Malphite</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Malzahar</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Maokai</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Master Yi</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Miss Fortune</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Mordekaiser</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Morgana</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Nami</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Nasus</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Nautilus</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Nidalee</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Nocturne</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Nunu</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Olaf</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Orianna</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Pantheon</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Poppy</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Quinn</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Rammus</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Rek'Sai</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Renekton</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Rengar</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Riven</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Rumble</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Ryze</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Sejuani</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Shaco</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Shen</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Shyvana</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Singed</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Sion</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Sivir</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Skarner</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Sona</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Soraka</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Swain</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Syndra</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Tahm Kench</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Talon</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Taliyah</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Taric</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Teemo</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Thresh</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Tristana</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Trundle</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Tryndamere</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Twisted Fate</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Twitch</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Udyr</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Urgot</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Varus</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Vayne</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Veigar</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Vi</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Viktor</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Vladimir</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Vel'Koz</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Volibear</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Warwick</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Wukong</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Xerath</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Xin Zhao</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Yasuo</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Yorick</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Zac</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Zed</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Ziggs</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Zilean</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Zyra</a></li>
+                </ul>
               </div>
 
             </div>
