@@ -35,7 +35,7 @@ function clickChamps() {
 	var champList = document.getElementById("championsList").children;
 
 	document.getElementById("titleChamp").innerHTML = "Champions";
-
+	clearChampList();
 
 	for(i=0; i < champList.length ; i++) {
 		champList[i].style.display = "inline";
