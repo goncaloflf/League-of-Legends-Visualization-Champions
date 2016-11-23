@@ -1,7 +1,7 @@
 var topl = ["Aatrox","Cho\'Gath","Darius","Dr. Mundo","Fiora","Gangplank","Garen","Gnar","Heimerdinger","Illaoi","Irelia","Jax","Jayce","Kayle","Kennen","Kled","Maokai","Mordekaiser","Nasus","Olaf","Pantheon","Poppy","Quinn","Renekton","Riven","Rumble","Ryze","Shen","Singed","Sion","Swain","Teemo","Trundle","Tryndamere","Urgot","Vladimir","Wukong","Yorick"]
 var jun = ["Amumu","Elise","Evelynn","Fiddlesticks","Gragas","Graves","Hecarim","Ivern","Jarvan IV","Kha\'Zix","Kindred","Lee Sin","Master Yi","Nidalee","Nocturne","Nunu","Rammus","Rek\'Sai","Rengar","Sejuani","Shaco","Shyvana","Skarner","Udyr","Vi","Volibear","Warwick","Xin Zhao","Zac"]
 var mid = ["Ahri","Akali","Annie","Anivia","Aurelion Sol","Azir","Brand","Cassiopeia","Diana","Ekko","Fizz","Galio","Karthus","Kassadin","Katarina","LeBlanc","Lissandra","Lux","Malzahar","Orianna","Syndra","Taliyah","Talon","Twisted Fate","Veigar","Vel\'Koz","Viktor","Xerath","Yasuo","Zed","Ziggs"]
-var adc = ["Ashe","Caitlyn","Corki","Draven","Ezreal","Jhin","Jynx","Kalista","Kog\'Maw","Lucian","Miss Fortune","Sivir","Tristana","Twitch","Varus","Vayne"]
+var adc = ["Ashe","Caitlyn","Corki","Draven","Ezreal","Jhin","Jinx","Kalista","Kog\'Maw","Lucian","Miss Fortune","Sivir","Tristana","Twitch","Varus","Vayne"]
 var sup = ["Alistar","Bard","Blitzcrank","Braum","Janna","Karma","Leona","Lulu","Morgana","Nami","Nautilus","Sona","Soraka","Tahm Kench","Taric","Thresh","Zilean","Zyra"]
 var currentChamp;
 
@@ -59,16 +59,23 @@ function highlightClickList(element) {
 
 	if(adc.indexOf(champion) >= 0){
 		document.getElementById("adcCircle").className=("highlight");
+		document.getElementById("lanePortrait").src = "images/adc.png"
 	} else if(sup.indexOf(champion) >= 0){
 		document.getElementById("supportCircle").className=("highlight");
+		document.getElementById("lanePortrait").src = "images/sup.png"
 	} else if(mid.indexOf(champion) >= 0){
 		document.getElementById("midCircle").className=("highlight");
+		document.getElementById("lanePortrait").src = "images/mid.png"
 	} else if(topl.indexOf(champion) >= 0){
 		document.getElementById("topCircle").className=("highlight");
+		document.getElementById("lanePortrait").src = "images/top.png"
 	} else if(jun.indexOf(champion) >= 0){
 		document.getElementById("jungleCircle").className=("highlight");
+		document.getElementById("lanePortrait").src = "images/jun.png"
 	}
 
+	currentChamp = champion;
+	document.getElementById("championPortrait").src = "champions/" + champion + "_Square_0.png";
 	element.className = ("selected");
 }
 

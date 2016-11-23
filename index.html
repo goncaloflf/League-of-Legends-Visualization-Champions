@@ -23,8 +23,9 @@
                 <div onclick="clickCircles(this)" id="topCircle" class="hidden">Top</div>
               </div>
 
-              <div id="champSelRight"> 
-                <h4 id="titleChamp">Champions</h4>
+              <h4 id="titleChamp" style="position: fixed;top: -9;left: 350;">Champions</h4>
+
+              <div id="champSelRight">                 
                 <ul id="championsList">
                   <li><a onclick="highlightClickList(this)" href="#">Aatrox</a></li>
                   <li><a onclick="highlightClickList(this)" href="#">Ahri</a></li>
@@ -69,8 +70,8 @@
                   <li><a onclick="highlightClickList(this)" href="#">Jarvan IV</a></li>
                   <li><a onclick="highlightClickList(this)" href="#">Jax</a></li>
                   <li><a onclick="highlightClickList(this)" href="#">Jayce</a></li>
+                  <li><a onclick="highlightClickList(this)" href="#">Jinx</a></li>
                   <li><a onclick="highlightClickList(this)" href="#">Jhin</a></li>
-                  <li><a onclick="highlightClickList(this)" href="#">Jynx</a></li>
                   <li><a onclick="highlightClickList(this)" href="#">Kalista</a></li>
                   <li><a onclick="highlightClickList(this)" href="#">Karma</a></li>
                   <li><a onclick="highlightClickList(this)" href="#">Karthus</a></li>
@@ -165,7 +166,8 @@
 
           <td>
             <div class="container">
-
+              <img src="champions/blank.gif" id="championPortrait"/>
+              <img src="champions/blank.gif" id="lanePortrait"/>
             </div>
           </td>
 

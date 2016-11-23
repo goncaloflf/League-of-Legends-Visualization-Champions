@@ -47,12 +47,6 @@ li a{
 	transition: font-size 0.3s ease, background-color 0.3s ease;
 }
 
-li a:hover {
-  font-size: 20px;
-  background: #f6f6f6;
-}
-
-
 body {
     margin: 0px;
     padding: 0px;
@@ -60,6 +54,22 @@ body {
 
 tr {
 	height: 316.5px;
+}
+
+#championPortrait {
+	position: absolute;
+	top:5;
+	left: 462;
+	width: 120px;
+	height: 120px;
+}
+
+#lanePortrait{
+	position: absolute;
+	top:5;
+	left: 793px;
+	width: 120px;
+	height: 120px;
 }
 
 .selected {
@@ -75,13 +85,13 @@ tr {
 }
 
 #champSelRight {
-	position: relative;
-	top: -316px;
-	left: 343.6px;
-	width: 24%;
-	height: 100%;
-	overflow-y: scroll;
-	overflow-x: hidden;
+    position: relative;
+    top: -285;
+    left: 343.6px;
+    width: 24%;
+    height: 90%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .container {	
@@ -228,14 +238,20 @@ tr {
 
 
 .highlight {
--webkit-box-shadow: inset 200px 200px 300px 200px rgba(255,255,46,1);
--moz-box-shadow: inset 200px 200px 300px 200px rgba(255,255,46,1);
-box-shadow: inset 200px 200px 300px 200px rgba(255,255,46,1);
+	-webkit-box-shadow: inset 200px 200px 300px 200px rgba(255,0,0,1);
+	-moz-box-shadow: inset 200px 200px 300px 200px rgba(255,0,0,1);
+	box-shadow: inset 200px 200px 300px 200px rgba(255,0,0,1);
 }
 
-.selected {
-	font-size: 20px;
- 	background: #FFFF66;
+.selected, .selected:hover {
+	font-size: 17px;
+ 	background: red;
+ 	color: white;
+}
+
+li a:hover {
+	font-size: 17px;
+	background: #f6f6f6;
 }
 
 .hidden {
