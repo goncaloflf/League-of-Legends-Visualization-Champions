@@ -1,6 +1,6 @@
-var top = ["Aatrox","Cho\'Gath","Darius","Dr. Mundo","Fiora","Gangplank","Garen","Gnar","Heimerdinger","Illaoi","Irelia","Jax","Jayce","Kayle","Kennen","Kled","Malphite","Maokai","Mordekaiser","Nasus","Olaf","Pantheon","Poppy","Quinn","Renekton","Riven","Rumble","Ryze","Shen","Singed","Sion","Swain","Teemo","Trundle","Tryndamere","Urgot","Vladimir","Wukong","Yorick"]
+var topl = ["Aatrox","Cho\'Gath","Darius","Dr. Mundo","Fiora","Gangplank","Garen","Gnar","Heimerdinger","Illaoi","Irelia","Jax","Jayce","Kayle","Kennen","Kled","Maokai","Mordekaiser","Nasus","Olaf","Pantheon","Poppy","Quinn","Renekton","Riven","Rumble","Ryze","Shen","Singed","Sion","Swain","Teemo","Trundle","Tryndamere","Urgot","Vladimir","Wukong","Yorick"]
 var jun = ["Amumu","Elise","Evelynn","Fiddlesticks","Gragas","Graves","Hecarim","Ivern","Jarvan IV","Kha\'Zix","Kindred","Lee Sin","Master Yi","Nidalee","Nocturne","Nunu","Rammus","Rek\'Sai","Rengar","Sejuani","Shaco","Shyvana","Skarner","Udyr","Vi","Volibear","Warwick","Xin Zhao","Zac"]
-var mid = ["Ahri","Akali","Anivia","Aurelion Sol","Azir","Brand","Cassiopeia","Diana ","Ekko","Fizz","Galio","Karthus","Kassadin","Katarina","LeBlanc","Lissandra","Lux","Malzahar","Orianna","Syndra","Taliyah","Talon","Twisted Fate","Veigar","Vel\'Koz","Viktor","Xerath","Yasuo","Zed","Ziggs"]
+var mid = ["Ahri","Akali","Annie","Anivia","Aurelion Sol","Azir","Brand","Cassiopeia","Diana","Ekko","Fizz","Galio","Karthus","Kassadin","Katarina","LeBlanc","Lissandra","Lux","Malzahar","Orianna","Syndra","Taliyah","Talon","Twisted Fate","Veigar","Vel\'Koz","Viktor","Xerath","Yasuo","Zed","Ziggs"]
 var adc = ["Ashe","Caitlyn","Corki","Draven","Ezreal","Jhin","Jynx","Kalista","Kog\'Maw","Lucian","Miss Fortune","Sivir","Tristana","Twitch","Varus","Vayne"]
 var sup = ["Alistar","Bard","Blitzcrank","Braum","Janna","Karma","Leona","Lulu","Morgana","Nami","Nautilus","Sona","Soraka","Tahm Kench","Taric","Thresh","Zilean","Zyra"]
 var currentChamp;
@@ -10,6 +10,8 @@ var currentChamp;
 function clickCircles(stuff) {
 	var child = document.getElementById("champSelLeft").children;
 	var champList = document.getElementById("championsList").children;
+
+	clearChampList();
 
 	for(i=0 ; i < child.length ; i++){
 		document.getElementById(child[i].id).className = ("");
@@ -32,6 +34,9 @@ function clickChamps() {
 	var child = document.getElementById("champSelLeft").children;
 	var champList = document.getElementById("championsList").children;
 
+	document.getElementById("titleChamp").innerHTML = "Champions";
+
+
 	for(i=0; i < champList.length ; i++) {
 		champList[i].style.display = "inline";
 	}
@@ -50,36 +55,51 @@ function highlightClickList(element) {
 		document.getElementById(child[i].id).className = ("");
 	}
 
+	clearChampList();
+
 	if(adc.indexOf(champion) >= 0){
 		document.getElementById("adcCircle").className=("highlight");
 	} else if(sup.indexOf(champion) >= 0){
 		document.getElementById("supportCircle").className=("highlight");
 	} else if(mid.indexOf(champion) >= 0){
 		document.getElementById("midCircle").className=("highlight");
-	} else if(top.indexOf(champion) >= 0){
+	} else if(topl.indexOf(champion) >= 0){
 		document.getElementById("topCircle").className=("highlight");
 	} else if(jun.indexOf(champion) >= 0){
 		document.getElementById("jungleCircle").className=("highlight");
 	}
+
+	element.className = ("selected");
 }
 
 
 function checkClicked(id){
 	switch(id){
 		case "supportCircle":
+			document.getElementById("titleChamp").innerHTML = "Support";
 			return sup;
 
 		case "topCircle":
-			return top;
+			document.getElementById("titleChamp").innerHTML = "Top";
+			return topl;
 
 		case "midCircle":
+			document.getElementById("titleChamp").innerHTML = "Mid";
 			return mid;
 
 		case "adcCircle":
+			document.getElementById("titleChamp").innerHTML = "ADC";
 			return adc;
 
 		case "jungleCircle":
+			document.getElementById("titleChamp").innerHTML = "Jungle";
 			return jun;
+	}
+}
 
+function clearChampList() {
+	var champList = document.getElementById("championsList").children;
+	for(i = 0; i < champList.length ; i++){
+		champList[i].children[0].className = ("");
 	}
 }

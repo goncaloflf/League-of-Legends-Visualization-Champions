@@ -62,6 +62,10 @@ tr {
 	height: 316.5px;
 }
 
+.selected {
+	font-size: 20px;
+ 	background: #FFFF66;
+}
 
 
 #champSelLeft {
@@ -77,6 +81,7 @@ tr {
 	width: 24%;
 	height: 100%;
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 .container {	
@@ -120,8 +125,8 @@ tr {
 	vertical-align: middle;
 	line-height: 75px;
 	cursor: pointer;
-	border:1px solid #142c69;
-	background-color:#0088ff;
+	border:1px solid black;
+	background-color:#FF9900;
 	color:#ffffff;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f004f;
@@ -133,9 +138,9 @@ tr {
     left: 143px;
     width: 75px;
     height: 75px;
-   	border:1px solid #18ab29;
+	border:1px solid black;
     border-radius: 37.5px;
-	background-color:#44c767;
+	background-color:#FF9900;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 75px;
@@ -158,8 +163,8 @@ tr {
 	line-height: 75px;
 	cursor: pointer;
 	color:#ffffff;
-	border:1px solid #692b15;
-	background-color:#944426;
+	border:1px solid black;
+	background-color:#FF9900;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f004f;
 }
@@ -171,8 +176,8 @@ tr {
 	width: 75px;
 	height: 75px;
 	border-radius: 37.5px;
-	border:1px solid #6b1414;
-	background-color:#aa00ff;
+	border:1px solid black;
+	background-color:#FF9900;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 75px;
@@ -189,43 +194,48 @@ tr {
     width: 75px;
     height: 75px;
     border-radius: 37.5px;
-	background: orange;
+	background: #FF9900;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 75px;
 	cursor: pointer;
-	background-color:#ff7700;
+	background-color:#FF9900;
 	color:#ffffff;
-	border:1px solid #6b1414;
+	border:1px solid black;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f004f;
 }
 
 #topCircle:hover {
-	background-color:#fa900f;
+	background-color:#FFCC00;
 }
 
 #midCircle:hover {
-	background-color:#bf0dfa;
+	background-color:#FFCC00;
 }
 
 #jungleCircle:hover {
-	background-color:#663412;
+	background-color:#FFCC00;
 }
 
 #adcCircle:hover {
-	background-color:#5cbf2a;
+	background-color:#FFCC00;
 }
 
 #supportCircle:hover {
-	background-color:#0f94fa;
+	background-color:#FFCC00;
 }
 
 
 .highlight {
-	-webkit-box-shadow: 0px 0px 18px 17px rgba(255,247,0,1);
-    -moz-box-shadow: 0px 0px 18px 17px rgba(255,247,0,1);
-    box-shadow: 0px 0px 18px 17px rgba(255,247,0,1);
+-webkit-box-shadow: inset 200px 200px 300px 200px rgba(255,255,46,1);
+-moz-box-shadow: inset 200px 200px 300px 200px rgba(255,255,46,1);
+box-shadow: inset 200px 200px 300px 200px rgba(255,255,46,1);
+}
+
+.selected {
+	font-size: 20px;
+ 	background: #FFFF66;
 }
 
 .hidden {
