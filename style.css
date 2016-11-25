@@ -259,13 +259,9 @@ li a:hover {
 }
 
 #starplot {
-	background-color: red;
 	width: 180px;
 	height: 180px;
-	position: relative;
-	left: 135px;
-	top: 130px;
+	position: absolute;
+	top: 80px;
+	left: 530px;
 }
-
-
-
