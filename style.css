@@ -258,5 +258,14 @@ li a:hover {
 	visibility: hidden;
 }
 
+#starplot {
+	background-color: red;
+	width: 180px;
+	height: 180px;
+	position: relative;
+	left: 135px;
+	top: 130px;
+}
+
 
 

@@ -4,6 +4,30 @@ var mid = ["Ahri","Akali","Annie","Anivia","Aurelion Sol","Azir","Brand","Cassio
 var adc = ["Ashe","Caitlyn","Corki","Draven","Ezreal","Jhin","Jinx","Kalista","Kog\'Maw","Lucian","Miss Fortune","Sivir","Tristana","Twitch","Varus","Vayne"]
 var sup = ["Alistar","Bard","Blitzcrank","Braum","Janna","Karma","Leona","Lulu","Morgana","Nami","Nautilus","Sona","Soraka","Tahm Kench","Taric","Thresh","Zilean","Zyra"]
 var currentChamp;
+var dataset;
+
+
+d3.json("championstotal.json", function(data){
+	dataset = data;
+
+	genS2();
+});
+
+
+function genS2() {
+	var	svg	= d3.select("#starplot");	
+	var star = d3.starPlot();
+	svg	= svg.append("svg")	
+			 .attr("width",180)	
+	         .attr("height",180);
+
+
+}
+
+
+
+
+
 
 
 
@@ -12,6 +36,10 @@ function clickCircles(stuff) {
 	var champList = document.getElementById("championsList").children;
 
 	clearChampList();
+	document.getElementById("lanePortrait").src = "champions/blank.gif"
+	document.getElementById("championPortrait").src = "champions/blank.gif"
+	currentChamp = "";
+
 
 	for(i=0 ; i < child.length ; i++){
 		document.getElementById(child[i].id).className = ("");
