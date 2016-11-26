@@ -41,7 +41,7 @@ li a{
 	text-decoration: none;
 	color: #fff;
 	display: block;
-	width: 109px;
+	width: 118px;
 	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 	-webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
 	-moz-transition: font-size 0.3s ease, background-color 0.3s ease;
@@ -90,8 +90,8 @@ tr {
 #champSelRight {
     position: relative;
     top: -285;
-    left: 343.6px;
-    width: 24%;
+    left: 335.6px;
+    width: 25.8%;
     height: 90%;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -247,7 +247,7 @@ tr {
 }
 
 .selected, .selected:hover {
-	font-size: 24px;
+	font-size: 19px;
 	text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
 	opacity:1;
 }
