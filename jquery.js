@@ -7,7 +7,7 @@ $(document).ready(function(e) {
 		
 		championName = $(this).text();
 		personPhoto = "champions/" + championName + "_Square_0.png";
-		console.log(personPhoto)
+		
 		url = 'url(' + personPhoto + ')'
 		$(this).css('background-image', url);
 		$(this).css('background-position-y', '73px');
