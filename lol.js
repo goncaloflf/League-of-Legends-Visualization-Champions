@@ -105,19 +105,19 @@ function highlightClickList(element) {
 
 	if(adc.indexOf(champion) >= 0){
 		document.getElementById("adcCircle").className=("highlight");
-		document.getElementById("lanePortrait").src = "images/adc.png"
+		document.getElementById("lanePortrait").src = "images/adc.jpg"
 	} else if(sup.indexOf(champion) >= 0){
 		document.getElementById("supportCircle").className=("highlight");
-		document.getElementById("lanePortrait").src = "images/sup.png"
+		document.getElementById("lanePortrait").src = "images/sup.jpg"
 	} else if(mid.indexOf(champion) >= 0){
 		document.getElementById("midCircle").className=("highlight");
-		document.getElementById("lanePortrait").src = "images/mid.png"
+		document.getElementById("lanePortrait").src = "images/mid.jpg"
 	} else if(topl.indexOf(champion) >= 0){
 		document.getElementById("topCircle").className=("highlight");
-		document.getElementById("lanePortrait").src = "images/top.png"
+		document.getElementById("lanePortrait").src = "images/top.jpg"
 	} else if(jun.indexOf(champion) >= 0){
 		document.getElementById("jungleCircle").className=("highlight");
-		document.getElementById("lanePortrait").src = "images/jun.png"
+		document.getElementById("lanePortrait").src = "images/jun.jpg"
 	}
 
 	currentChamp = champion;
