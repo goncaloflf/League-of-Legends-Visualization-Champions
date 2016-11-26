@@ -6,10 +6,10 @@ $(document).ready(function(e) {
 	$("li a").each(function() {
 		
 		championName = $(this).text();
-		championName = championName.replace('','')
-		personPhoto = 'champions/' + championName + '_Square_0.png';
+		personPhoto = "champions/" + championName + "_Square_0.png";
 		console.log(personPhoto)
-		$(this).css('background-image', 'url(' + personPhoto + ')');
+		url = 'url(' + personPhoto + ')'
+		$(this).css('background-image', url);
 		$(this).css('background-position-y', '73px');
 		
 	  	

@@ -42,12 +42,13 @@ li a{
 	color: #fff;
 	display: block;
 	width: 109px;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 	-webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
 	-moz-transition: font-size 0.3s ease, background-color 0.3s ease;
 	-o-transition: font-size 0.3s ease, background-color 0.3s ease;
 	-ms-transition: font-size 0.3s ease, background-color 0.3s ease;
 	transition: font-size 0.3s ease, background-color 0.3s ease;
+	opacity:0.6;
 }
 
 body {
@@ -246,7 +247,9 @@ tr {
 }
 
 .selected, .selected:hover {
-	font-size: 22px;
+	font-size: 24px;
+	text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+	opacity:1;
 }
 
 li a:hover {
