@@ -254,6 +254,7 @@ tr {
 
 li a:hover {
 	font-size: 17px;
+	opacity: 0.8;
 }
 
 .hidden {
