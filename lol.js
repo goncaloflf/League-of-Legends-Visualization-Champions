@@ -260,6 +260,7 @@ var RadarChart = {
           ]);
         });
       dataValues.push(dataValues[0]);
+      console.log(dataValues);
       //é aqui que isto tá fodido
       g.selectAll(".area")
                      .data([dataValues])
@@ -273,7 +274,7 @@ var RadarChart = {
                      .attr("points",function(d) {
                          var str="";
                          for(var pti=0;pti<d.length;pti++){
-                             str=str+d[pti][0]+","+d[pti][2]+" ";
+                             str=str+d[pti][0]+","+d[pti][1]+" ";
                          }
                          return str;
                       })
