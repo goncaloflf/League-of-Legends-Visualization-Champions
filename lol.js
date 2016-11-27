@@ -232,6 +232,37 @@ function clearChampList() {
 	}
 }
 
+function formatMe(d){
+          var toReturn = 0;
+          switch(d.axis){
+            case ("Minions"):
+              toReturn = d.value*MAX_FARM;
+              break;
+
+            case ("Gold Earned"):
+              toReturn = d.value*MAX_GOLD;
+              break;
+
+            case ("Kills"):
+              toReturn = d.value*MAX_KILLS;
+              break;
+
+            case ("Deaths"):
+              toReturn = d.value*MAX_DEATH;
+              break;
+
+            case ("Wards"):
+              toReturn = d.value*MAX_WARDS;
+              break;
+
+            case ("Damage Dealt"):
+              toReturn = d.value*MAX_DEALT;
+              break;
+
+          }
+          return toReturn.toFixed(2)}
+
+
 
 
 var RadarChart = {
@@ -297,7 +328,6 @@ var RadarChart = {
             .attr("transform", "translate(" + cfg.TranslateX + "," + cfg.TranslateY + ")");
             ;
 
-    var tooltip;
 
     //Circular segments
     for(var j=0; j<cfg.levels-1; j++){
@@ -357,7 +387,6 @@ var RadarChart = {
         });
       dataValues.push(dataValues[0]);
       console.log(dataValues);
-      //é aqui que isto tá fodido
       g.selectAll(".area")
                      .data([dataValues])
                      .enter()
@@ -393,7 +422,7 @@ var RadarChart = {
     });
     series=0;
 
-
+    var aux;
     d.forEach(function(y, x){
       g.selectAll(".nodes")
         .data(y).enter()
@@ -413,14 +442,14 @@ var RadarChart = {
         })
         .attr("data-id", function(j){return j.axis})
         .style("fill", cfg.color(series)).style("fill-opacity", .9)
-        .on('mouseover', function (d){
+        .on('mouseover', function (d,j){
                     newX =  parseFloat(d3.select(this).attr('cx')) - 10;
                     newY =  parseFloat(d3.select(this).attr('cy')) - 5;
 
                     tooltip
                         .attr('x', newX)
                         .attr('y', newY)
-                        .text(Format(d.value))
+                        .text(formatMe(d))
                         .transition(200)
                         .style('opacity', 1);
 
@@ -439,9 +468,7 @@ var RadarChart = {
                     g.selectAll("polygon")
                         .transition(200)
                         .style("fill-opacity", cfg.opacityArea);
-                  })
-        .append("svg:title")
-        .text(function(j){return Math.max(j.value, 0)});
+                  });
 
       series++;
     });
