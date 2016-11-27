@@ -6,44 +6,48 @@ var sup = ["Alistar","Bard","Blitzcrank","Braum","Janna","Karma","Leona","Lulu",
 var currentChamp;
 var dataset;
 
-/*
-d3.json("championstotal.json", function(data){
-	dataset = data;
 
-	genS2();
+d3.json("championstotal.json", function(data){
+	dataset = data.data;
+
 });
 
+function getMax(){
+  var dealt = 0;
+  var taken = 0;
+  var farm = 0;
+  var gold = 0;
+  var kills = 0;
+  var death = 0;
+  for(i = 0; i < dataset.length ; i++) {
+      if(dataset[i].DamageToChampion > dealt) {
+        dealt = dataset[i].DamageToChampion;
+      }
+      if(dataset[i].DamageTaken > taken) {
+        taken = dataset[i].DamageTaken;
+      }
+      if(dataset[i].MinionGame > farm) {
+        farm = dataset[i].MinionGame;
+      }
+      if(dataset[i].KillGame > kills) {
+        kills = dataset[i].KillGame;
+      }
+      if(dataset[i].GoldSpentGame > gold) {
+        gold = dataset[i].GoldSpentGame;
+      }
+      if(dataset[i].DeathGame > death) {
+        death = dataset[i].DeathGame;
+      }
+  }
+  console.log("dealt: " + dealt);
+  console.log("taken: " + taken);
+  console.log("farm: " + farm);
+  console.log("gold: " + gold);
+  console.log("kills: " + kills);
+  console.log("death: " + death);
+}
 
-function genS2() {
-	var	svg	= d3.select("#starplot");	
-	var star = d3.starPlot();
-	svg	= svg.append("svg")	
-			 .attr("width",180)	
-	         .attr("height",180);
 
-	star.properties([
-		'Damage Dealt',
-		'Damage Taken',
-		'Gold Earned',
-		'Gold Spent',
-		'Kills',
-		'Deaths',
-		'Assists']);
-
-	star.labels([
-		'Damage Dealt',
-		'Damage Taken',
-		'Gold Earned',
-		'Gold Spent',
-		'Kills',
-		'Deaths',
-		'Assists']);
-
-	star.includeGuidelines(true);
-
-	svg.append("g").datum(dataset.data[0]).call(star).call(star.interaction);	
-	
-}*/
 
 function clickCircles(stuff) {
 	var child = document.getElementById("champSelLeft").children;
