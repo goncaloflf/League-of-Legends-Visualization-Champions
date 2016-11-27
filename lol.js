@@ -11,7 +11,7 @@ const MAX_FARM = 221.382937212;
 const MAX_GOLD = 12493.970097955;
 const MAX_KILLS = 7.987258141;
 const MAX_DEATH = 7.018248175;
-var colorscale = d3.scaleOrdinal(d3.schemeCategory10);
+var colorscale = d3.scaleOrdinal(d3.schemeReds);
 var w = 180, h = 180;
 
 d3.json("championstotal.json", function(data){
@@ -90,6 +90,8 @@ function clickCircles(stuff) {
 	document.getElementById("championPortrait").src = "champions/blank.gif"
 	currentChamp = "";
   document.getElementById("starplot").innerHTML = "";
+  document.getElementById("titleTile2").innerHTML = "";
+
 
 
 
@@ -118,6 +120,8 @@ function clickChamps() {
 	document.getElementById("lanePortrait").src = "champions/blank.gif"
 	document.getElementById("championPortrait").src = "champions/blank.gif"
   document.getElementById("starplot").innerHTML = "";
+  document.getElementById("titleTile2").innerHTML = "";
+
 
 	clearChampList();
 
@@ -183,6 +187,7 @@ function highlightClickList(element) {
 	currentChamp = champion;
 	document.getElementById("championPortrait").src = "champions/" + champion + "_Square_0.png";
 	element.className = ("selected");
+  document.getElementById("titleTile2").innerHTML = champion;
 
   RadarChart.draw("#starplot");
 
@@ -303,7 +308,7 @@ var RadarChart = {
      TranslateY: 30,
      ExtraWidthX: 300,
      ExtraWidthY: 100,
-     color: d3.scaleOrdinal(d3.schemeCategory10)
+     color: d3.scaleOrdinal(d3.interpolateRdGy(1))
     };
 
     if('undefined' !== typeof options){
