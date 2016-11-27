@@ -1,4 +1,4 @@
-var w = 180,
+/*var w = 180,
     h = 180;
 
 var colorscale = d3.scaleOrdinal(d3.schemeCategory10);
@@ -10,7 +10,7 @@ var LegendOptions = ['Smartphone','Tablet'];
 var d = [
           [
             {axis:"Damage Dealt",value:0.59},
-            {axis:"Damage Taken",value:0.56},
+            {axis:"Assist",value:0.56},
             {axis:"Minions per Game",value:0.42},
             {axis:"Gold Earned",value:0.34},
             {axis:"Kills",value:0.48},
@@ -22,7 +22,7 @@ var d = [
 var mycfg = {
   w: w,
   h: h,
-  maxValue: 0.6,
+  maxValue: 1,
   levels: 6,
   ExtraWidthX: 300
 }
@@ -79,4 +79,4 @@ var legend = svg.append("g")
       .attr("font-size", "11px")
       .attr("fill", "#737373")
       .text(function(d) { return d; })
-      ; 
+      ; */

@@ -3,49 +3,81 @@ var jun = ["Amumu","Elise","Evelynn","Fiddlesticks","Gragas","Graves","Hecarim",
 var mid = ["Ahri","Akali","Annie","Anivia","Aurelion Sol","Azir","Brand","Cassiopeia","Diana","Ekko","Fizz","Galio","Karthus","Kassadin","Katarina","LeBlanc","Lissandra","Lux","Malzahar","Orianna","Syndra","Taliyah","Talon","Twisted Fate","Veigar","Vel\'Koz","Viktor","Xerath","Yasuo","Zed","Ziggs"]
 var adc = ["Ashe","Caitlyn","Corki","Draven","Ezreal","Jhin","Jinx","Kalista","Kog\'Maw","Lucian","Miss Fortune","Sivir","Tristana","Twitch","Varus","Vayne"]
 var sup = ["Alistar","Bard","Blitzcrank","Braum","Janna","Karma","Leona","Lulu","Morgana","Nami","Nautilus","Sona","Soraka","Tahm Kench","Taric","Thresh","Zilean","Zyra"]
-var currentChamp;
+var currentChamp = "Nami";
 var dataset;
-
+const MAX_DEALT = 29000.321167883;
+const MAX_WARDS = 27.114444278;
+const MAX_FARM = 221.382937212;
+const MAX_GOLD = 12493.970097955;
+const MAX_KILLS = 7.987258141;
+const MAX_DEATH = 7.018248175;
+var colorscale = d3.scaleOrdinal(d3.schemeCategory10);
+var w = 180, h = 180;
 
 d3.json("championstotal.json", function(data){
 	dataset = data.data;
-
 });
 
+//You have served well, young function. Your job won't be for nothing. Long live and prosper.
+/*
+//if someone reads this function: i'm really sorry for this code. i'm not proud of it myself.
 function getMax(){
   var dealt = 0;
-  var taken = 0;
+  var wards = 0;
   var farm = 0;
   var gold = 0;
   var kills = 0;
   var death = 0;
+
+  //watch out: bad code below this line!
+  var tmpdealt = 0;
+  var tmpwards = 0;
+  var tmpfarm = 0;
+  var tmpgold = 0;
+  var tmpkills = 0;
+  var tmpdeath = 0;
   for(i = 0; i < dataset.length ; i++) {
-      if(dataset[i].DamageToChampion > dealt) {
-        dealt = dataset[i].DamageToChampion;
+      tmpdealt = dataset[i].DamageChampionGame;
+      if(typeof(tmpdealt) == "string") { tmpdealt = tmpdealt.replace(',','.'); }
+      if(parseFloat(tmpdealt) > dealt) {
+        dealt = parseFloat(tmpdealt);
       }
-      if(dataset[i].DamageTaken > taken) {
-        taken = dataset[i].DamageTaken;
+      tmpwards = dataset[i].WardsPlacedGame;
+      if(typeof(tmpwards) == "string") { tmpwards = tmpwards.replace(',','.'); }
+      if(parseFloat(tmpwards) > wards) {
+        wards = parseFloat(tmpwards);
       }
-      if(dataset[i].MinionGame > farm) {
-        farm = dataset[i].MinionGame;
+      tmpfarm = dataset[i].MinionGame;
+      if(typeof(tmpfarm) == "string") { tmpfarm = tmpfarm.replace(',','.'); }
+      if(parseFloat(tmpfarm) > farm) {
+        farm = parseFloat(tmpfarm);
       }
-      if(dataset[i].KillGame > kills) {
-        kills = dataset[i].KillGame;
+      tmpkills = dataset[i].KillGame;
+      if(typeof(tmpkills) == "string") { tmpkills = tmpkills.replace(',','.');  }
+      if(parseFloat(tmpkills) > kills) {
+        kills = parseFloat(tmpkills);
       }
-      if(dataset[i].GoldSpentGame > gold) {
-        gold = dataset[i].GoldSpentGame;
+      tmpgold = dataset[i].GoldSpentGame;
+      if(typeof(tmpgold) == "string") { tmpgold = tmpgold.replace(',','.');}
+      if(parseFloat(tmpgold) > gold) {
+        gold = parseFloat(tmpgold);
       }
-      if(dataset[i].DeathGame > death) {
-        death = dataset[i].DeathGame;
+      tmpdeath = dataset[i].DeathGame;
+      if(typeof(tmpdeath) == "string") { tmpdeath = tmpdeath.replace(',','.'); }
+      if(parseFloat(tmpdeath) > death) {
+        death = parseFloat(tmpdeath);
       }
   }
   console.log("dealt: " + dealt);
-  console.log("taken: " + taken);
+  console.log("wards: " + wards);
   console.log("farm: " + farm);
   console.log("gold: " + gold);
   console.log("kills: " + kills);
   console.log("death: " + death);
+
+  return 0;
 }
+*/
 
 
 
@@ -57,6 +89,8 @@ function clickCircles(stuff) {
 	document.getElementById("lanePortrait").src = "champions/blank.gif"
 	document.getElementById("championPortrait").src = "champions/blank.gif"
 	currentChamp = "";
+  document.getElementById("starplot").innerHTML = "";
+
 
 
 	for(i=0 ; i < child.length ; i++){
@@ -83,6 +117,7 @@ function clickChamps() {
 	document.getElementById("titleChamp").innerHTML = "Champions";
 	document.getElementById("lanePortrait").src = "champions/blank.gif"
 	document.getElementById("championPortrait").src = "champions/blank.gif"
+  document.getElementById("starplot").innerHTML = "";
 
 	clearChampList();
 
@@ -113,7 +148,8 @@ function highlightClickList(element) {
     $("#adcCircle").removeClass("not-highlight");
     $("#championsCircle").addClass("highlight");
     $("#championsCircle").removeClass("not-highlight");
-    moveCircles();
+    moveCircles();        //console.log(champObject.ChampionName)
+
 	} else if(sup.indexOf(champion) >= 0){
     $("#supportCircle").addClass("highlight");
 		document.getElementById("lanePortrait").src = "images/sup.jpg"
@@ -147,6 +183,9 @@ function highlightClickList(element) {
 	currentChamp = champion;
 	document.getElementById("championPortrait").src = "champions/" + champion + "_Square_0.png";
 	element.className = ("selected");
+
+  RadarChart.draw("#starplot");
+
 }
 
 function moveCircles(){
@@ -196,7 +235,28 @@ function clearChampList() {
 
 
 var RadarChart = {
-  draw: function(id, d, options){
+  draw: function(id){
+
+    var champObject;
+
+    for(i = 0; i < dataset.length; i++){
+      if(dataset[i].ChampionName == currentChamp){
+        champObject = dataset[i];
+        console.log(champObject.ChampionName)
+      }
+    }
+
+    var d = [
+          [
+            {axis:"Damage Dealt",value: parseFloat(champObject.DamageChampionGame.replace(',','.')) / MAX_DEALT},
+            {axis:"Wards",value: parseFloat(champObject.WardsPlacedGame.replace(',','.')) / MAX_WARDS},
+            {axis:"Minions",value: parseFloat(champObject.MinionGame.replace(',','.')) / MAX_FARM},
+            {axis:"Gold Earned",value: parseFloat(champObject.GoldSpentGame.replace(',','.')) / MAX_GOLD},
+            {axis:"Kills",value: parseFloat(champObject.KillGame.replace(',','.')) / MAX_KILLS},
+            {axis:"Deaths",value: parseFloat(champObject.DeathGame.replace(',','.')) / MAX_DEATH}
+          ]
+        ];
+
   var cfg = {
      radius: 5,
      w: 180,
@@ -210,7 +270,7 @@ var RadarChart = {
      ToRight: 5,
      TranslateX: 80,
      TranslateY: 30,
-     ExtraWidthX: 100,
+     ExtraWidthX: 300,
      ExtraWidthY: 100,
      color: d3.scaleOrdinal(d3.schemeCategory10)
     };
