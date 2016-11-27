@@ -131,8 +131,8 @@ tr {
 
 #supportCircle {
 	position: relative;
-    top: 60px;
-    left: 75px;
+    top: -183px;
+    left: 143px;
     width: 75px;
     height: 75px;
     border-radius: 37.5px;
@@ -148,11 +148,16 @@ tr {
 	background-image:url('images/support_item.png');
 	background-position-x: 7px;
 	background-position-y: 3px;
+	-webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 #adcCircle {
 	position: relative;
-    top: -223px;
+    top: -183px;
     left: 143px;
     width: 75px;
     height: 75px;
@@ -165,13 +170,17 @@ tr {
 	color:#ffffff;
 	cursor: pointer;
 	background-image:url('images/infinity_edge.png');
-	
+	-webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 #jungleCircle {
 	position: relative;
-	top: -218px;
-	left: 253px;
+	top: -183px;
+    left: 143px;
     width: 75px;
     height: 75px;
     border-radius: 37.5px;
@@ -187,12 +196,17 @@ tr {
 	background-image:url('images/jungle_item.png');
 	background-position-x: 103px;
 	background-position-y: -8px;
+	-webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 #midCircle {
 	position: relative;
-    top: -171px;
-    left: 210px;
+    top: -183px;
+    left: 143px;
 	width: 75px;
 	height: 75px;
 	border-radius: 37.5px;
@@ -208,12 +222,17 @@ tr {
 	background-position-x: 0px;
 	background-position-y: -3px;
 	background-size: 74px;
+	-webkit-transition: all 0.4s ease;
+	  -moz-transition: all 0.4s ease;
+	  -o-transition: all 0.4s ease;
+	  -ms-transition: all 0.4s ease;
+	  transition: all 0.4s ease;
 }
 
 #topCircle {
 	position: relative;
-    top: -368px;
-    left: 32px;
+    top: -183px;
+    left: 143px;
     width: 75px;
     height: 75px;
     border-radius: 37.5px;
@@ -228,6 +247,11 @@ tr {
 	text-decoration:none;
 	background-image:url('images/top_item.png');
 	background-position-x: 5px;
+	-webkit-transition: all 0.4s ease;
+	  -moz-transition: all 0.4s ease;
+	  -o-transition: all 0.4s ease;
+	  -ms-transition: all 0.4s ease;
+	  transition: all 0.4s ease;
 }
 
 #topCircle:hover {
