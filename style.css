@@ -286,13 +286,13 @@ tr {
 
 
 .selected, .selected:hover {
-	font-size: 19px;
+	font-size: 16px;
 	text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
 	opacity:1;
 }
 
 li a:hover {
-	font-size: 17px;
+	font-size: 16px;
 	opacity: 0.8;
 }
 
