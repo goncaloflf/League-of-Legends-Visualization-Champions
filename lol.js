@@ -113,30 +113,35 @@ function highlightClickList(element) {
     $("#adcCircle").removeClass("not-highlight");
     $("#championsCircle").addClass("highlight");
     $("#championsCircle").removeClass("not-highlight");
+    moveCircles();
 	} else if(sup.indexOf(champion) >= 0){
     $("#supportCircle").addClass("highlight");
 		document.getElementById("lanePortrait").src = "images/sup.jpg"
     $("#supportCircle").removeClass("not-highlight");
     $("#championsCircle").addClass("highlight");
     $("#championsCircle").removeClass("not-highlight");
+    moveCircles();
 	} else if(mid.indexOf(champion) >= 0){
     $("#midCircle").addClass("highlight");
 		document.getElementById("lanePortrait").src = "images/mid.jpg"
     $("#midCircle").removeClass("not-highlight");
     $("#championsCircle").addClass("highlight");
     $("#championsCircle").removeClass("not-highlight");
+    moveCircles();
 	} else if(topl.indexOf(champion) >= 0){
     $("#topCircle").addClass("highlight");
 		document.getElementById("lanePortrait").src = "images/top.jpg"
     $("#topCircle").removeClass("not-highlight");
     $("#championsCircle").addClass("highlight");
     $("#championsCircle").removeClass("not-highlight");
+    moveCircles();
 	} else if(jun.indexOf(champion) >= 0){
     $("#jungleCircle").addClass("highlight");
 		document.getElementById("lanePortrait").src = "images/jun.jpg"
     $("#jungleCircle").removeClass("not-highlight");
     $("#championsCircle").addClass("highlight");
     $("#championsCircle").removeClass("not-highlight");
+    moveCircles();
 	}
 
 	currentChamp = champion;
@@ -144,6 +149,18 @@ function highlightClickList(element) {
 	element.className = ("selected");
 }
 
+function moveCircles(){
+    $("#supportCircle").css("top","60px");
+    $("#supportCircle").css("left","75px");
+    $("#adcCircle").css("top","-223px");
+    $("#adcCircle").css("left","143px");
+    $("#topCircle").css("top","-368px");
+    $("#topCircle").css("left","32px");
+    $("#midCircle").css("top","-171px");
+    $("#midCircle").css("left","210px");
+    $("#jungleCircle").css("top","-218px");
+    $("#jungleCircle").css("left","253px");
+}
 
 function checkClicked(id){
 	switch(id){

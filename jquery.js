@@ -58,6 +58,16 @@ $(document).ready(function(e) {
 		$("#championsCircle").removeClass("not-highlight");
 		$( "#championsCircle" ).siblings().removeClass("highlight");
 		$( "#championsCircle" ).siblings().addClass("not-highlight");
+		$("#supportCircle").css("top","60px");
+		$("#supportCircle").css("left","75px");
+		$("#adcCircle").css("top","-223px");
+		$("#adcCircle").css("left","143px");
+		$("#topCircle").css("top","-368px");
+		$("#topCircle").css("left","32px");
+		$("#midCircle").css("top","-171px");
+		$("#midCircle").css("left","210px");
+		$("#jungleCircle").css("top","-218px");
+		$("#jungleCircle").css("left","253px");
 	});
 
 
