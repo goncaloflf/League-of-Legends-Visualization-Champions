@@ -19,33 +19,45 @@ $(document).ready(function(e) {
 		$("#jungleCircle").addClass("highlight");
 		$("#jungleCircle").removeClass("not-highlight");
 		$( "#jungleCircle" ).siblings().removeClass("highlight");
+		$("#championsCircle").addClass("highlight");
+		$("#championsCircle").removeClass("not-highlight");
 	});
 
 	$("#midCircle").click(function(){
 		$("#midCircle").addClass("highlight");
 		$("#midCircle").removeClass("not-highlight");
 		$( "#midCircle" ).siblings().removeClass("highlight");
+		$("#championsCircle").addClass("highlight");
+		$("#championsCircle").removeClass("not-highlight");
 	});
 	$("#topCircle").click(function(){
 		$("#topCircle").addClass("highlight");
 		$("#topCircle").removeClass("not-highlight");
 		$( "#topCircle" ).siblings().removeClass("highlight");
+		$("#championsCircle").addClass("highlight");
+		$("#championsCircle").removeClass("not-highlight");
 	});
 	$("#adcCircle").click(function(){
 		$("#adcCircle").addClass("highlight");
 		$("#adcCircle").removeClass("not-highlight");
 		$( "#adcCircle" ).siblings().removeClass("highlight");
+		$("#championsCircle").addClass("highlight");
+		$("#championsCircle").removeClass("not-highlight");
 	});
 	$("#supportCircle").click(function(){
 		$("#supportCircle").addClass("highlight");
 		$("#supportCircle").removeClass("not-highlight");
 		$( "#supportCircle" ).siblings().removeClass("highlight");
+		$("#championsCircle").addClass("highlight");
+		$("#championsCircle").removeClass("not-highlight");
+
 	});
 
 	$("#championsCircle").click(function(){
 		$("#championsCircle").addClass("highlight");
 		$("#championsCircle").removeClass("not-highlight");
 		$( "#championsCircle" ).siblings().removeClass("highlight");
+		$( "#championsCircle" ).siblings().addClass("not-highlight");
 	});
 
 
