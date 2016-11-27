@@ -56,7 +56,7 @@ function clickCircles(stuff) {
 
 
 	for(i=0 ; i < child.length ; i++){
-		document.getElementById(child[i].id).className = ("");
+		document.getElementById(child[i].id).className = ("not-highlight");
 	}
 
 	var auxList = checkClicked(stuff.id);
@@ -98,26 +98,31 @@ function highlightClickList(element) {
 	var child = document.getElementById("champSelLeft").children;
 
 	for(i=0 ; i < child.length ; i++){
-		document.getElementById(child[i].id).className = ("");
+		document.getElementById(child[i].id).className = ("not-highlight");
 	}
 
 	clearChampList();
 
 	if(adc.indexOf(champion) >= 0){
-		document.getElementById("adcCircle").className=("highlight");
+		$("#adcCircle").addClass("highlight");
 		document.getElementById("lanePortrait").src = "images/adc.jpg"
+    $("#adcCircle").removeClass("not-highlight");
 	} else if(sup.indexOf(champion) >= 0){
-		document.getElementById("supportCircle").className=("highlight");
+    $("#supportCircle").addClass("highlight");
 		document.getElementById("lanePortrait").src = "images/sup.jpg"
+    $("#supportCircle").removeClass("not-highlight");
 	} else if(mid.indexOf(champion) >= 0){
-		document.getElementById("midCircle").className=("highlight");
+    $("#midCircle").addClass("highlight");
 		document.getElementById("lanePortrait").src = "images/mid.jpg"
+    $("#midCircle").removeClass("not-highlight");
 	} else if(topl.indexOf(champion) >= 0){
-		document.getElementById("topCircle").className=("highlight");
+    $("#topCircle").addClass("highlight");
 		document.getElementById("lanePortrait").src = "images/top.jpg"
+    $("#topCircle").removeClass("not-highlight");
 	} else if(jun.indexOf(champion) >= 0){
-		document.getElementById("jungleCircle").className=("highlight");
+    $("#jungleCircle").addClass("highlight");
 		document.getElementById("lanePortrait").src = "images/jun.jpg"
+    $("#jungleCircle").removeClass("not-highlight");
 	}
 
 	currentChamp = champion;

@@ -16,30 +16,36 @@ $(document).ready(function(e) {
 	// facto de estar tudo com id's as classes passam a não funcionar
 	// por causa das hierarquias css
 	$("#jungleCircle").click(function(){
-		$("#jungleCircle").css("opacity","1");
-		$( "#jungleCircle" ).siblings().css( "opacity", "0.6" );
+		$("#jungleCircle").addClass("highlight");
+		$("#jungleCircle").removeClass("not-highlight");
+		$( "#jungleCircle" ).siblings().removeClass("highlight");
 	});
 
 	$("#midCircle").click(function(){
-		$("#midCircle").css("opacity","1");
-		$( "#midCircle" ).siblings().css( "opacity", "0.6" );
+		$("#midCircle").addClass("highlight");
+		$("#midCircle").removeClass("not-highlight");
+		$( "#midCircle" ).siblings().removeClass("highlight");
 	});
 	$("#topCircle").click(function(){
-		$("#topCircle").css("opacity","1");
-		$( "#topCircle" ).siblings().css( "opacity", "0.6" );
+		$("#topCircle").addClass("highlight");
+		$("#topCircle").removeClass("not-highlight");
+		$( "#topCircle" ).siblings().removeClass("highlight");
 	});
 	$("#adcCircle").click(function(){
-		$("#adcCircle").css("opacity","1");
-		$( "#adcCircle" ).siblings().css( "opacity", "0.6" );
+		$("#adcCircle").addClass("highlight");
+		$("#adcCircle").removeClass("not-highlight");
+		$( "#adcCircle" ).siblings().removeClass("highlight");
 	});
 	$("#supportCircle").click(function(){
-		$("#supportCircle").css("opacity","1");
-		$( "#supportCircle" ).siblings().css( "opacity", "0.6" );
+		$("#supportCircle").addClass("highlight");
+		$("#supportCircle").removeClass("not-highlight");
+		$( "#supportCircle" ).siblings().removeClass("highlight");
 	});
 
 	$("#championsCircle").click(function(){
-		$("#championsCircle").css("opacity","1");
-		$( "#championsCircle" ).siblings().css( "opacity", "0.6" );
+		$("#championsCircle").addClass("highlight");
+		$("#championsCircle").removeClass("not-highlight");
+		$( "#championsCircle" ).siblings().removeClass("highlight");
 	});
 
 
