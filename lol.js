@@ -11,7 +11,7 @@ const MAX_FARM = 221.382937212;
 const MAX_GOLD = 12493.970097955;
 const MAX_KILLS = 7.987258141;
 const MAX_DEATH = 7.018248175;
-var colorscale = d3.scaleOrdinal(d3.schemeReds);
+var colorscale = d3.scaleOrdinal(d3.schemeSet1);
 var w = 180, h = 180;
 
 d3.json("championstotal.json", function(data){
@@ -308,7 +308,7 @@ var RadarChart = {
      TranslateY: 30,
      ExtraWidthX: 300,
      ExtraWidthY: 100,
-     color: d3.scaleOrdinal(d3.interpolateRdGy(1))
+     color: d3.scaleOrdinal(d3.schemeSet1)
     };
 
     if('undefined' !== typeof options){
