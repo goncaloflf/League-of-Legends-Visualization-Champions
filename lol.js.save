@@ -21,7 +21,7 @@ d3.json("championstotal.json", function(data){
 
 //You have served well, young function. Your job won't be for nothing. Long live and prosper.
 /*
-//if someone reads this function: i'm really sorry for this code. i'm not proud of it myself.
+	//if someone reads this function: i'm really sorry for this code. i'm not proud of it myself.
 function getMax(){
   var dealt = 0;
   var wards = 0;

@@ -311,3 +311,8 @@ li a:hover {
 .radar-chart-serie0{
 	cursor: pointer;
 }
+
+.tooltipBackground {
+	background-color: white;
+	color:black;
+}
