@@ -1,82 +1,69 @@
-/*var w = 180,
-    h = 180;
+//You have served well, young function. Your job won't be for nothing. Long live and prosper.
 
-var colorscale = d3.scaleOrdinal(d3.schemeCategory10);
+//if someone reads this function: i'm really sorry for this code. i'm not proud of it myself.
+function getMax(){
+  var dealt = 0;
+  var wards = 0;
+  var farm = 0;
+  var gold = 0;
+  var kills = 0;
+  var death = 0;
+  var assist = 0;
 
-//Legend titles
-var LegendOptions = ['Smartphone','Tablet'];
+  //watch out: bad code below this line!
+  var tmpdealt = 0;
+  var tmpassist = 0;
+  var tmpwards = 0;
+  var tmpfarm = 0;
+  var tmpgold = 0;
+  var tmpkills = 0;
+  var tmpdeath = 0;
+  for(i = 0; i < dataset.length ; i++) {
 
-//Data
-var d = [
-          [
-            {axis:"Damage Dealt",value:0.59},
-            {axis:"Assist",value:0.56},
-            {axis:"Minions per Game",value:0.42},
-            {axis:"Gold Earned",value:0.34},
-            {axis:"Kills",value:0.48},
-            {axis:"Deaths",value:0.08}
-          ]
-        ];
+      tmpassist = dataset[i].AssistGame;
+      if(typeof(tmpassist) == "string") { tmpassist = tmpassist.replace(',','.'); }
+      if(parseFloat(tmpassist) > assist) {
+        assist = parseFloat(tmpassist);
+      }
 
-//Options for the Radar chart, other than default
-var mycfg = {
-  w: w,
-  h: h,
-  maxValue: 1,
-  levels: 6,
-  ExtraWidthX: 300
+      tmpdealt = dataset[i].DamageChampionGame;
+      if(typeof(tmpdealt) == "string") { tmpdealt = tmpdealt.replace(',','.'); }
+      if(parseFloat(tmpdealt) > dealt) {
+        dealt = parseFloat(tmpdealt);
+      }
+      tmpwards = dataset[i].WardsPlacedGame;
+      if(typeof(tmpwards) == "string") { tmpwards = tmpwards.replace(',','.'); }
+      if(parseFloat(tmpwards) > wards) {
+        wards = parseFloat(tmpwards);
+      }
+      tmpfarm = dataset[i].MinionGame;
+      if(typeof(tmpfarm) == "string") { tmpfarm = tmpfarm.replace(',','.'); }
+      if(parseFloat(tmpfarm) > farm) {
+        farm = parseFloat(tmpfarm);
+      }
+      tmpkills = dataset[i].KillGame;
+      if(typeof(tmpkills) == "string") { tmpkills = tmpkills.replace(',','.');  }
+      if(parseFloat(tmpkills) > kills) {
+        kills = parseFloat(tmpkills);
+      }
+      tmpgold = dataset[i].GoldSpentGame;
+      if(typeof(tmpgold) == "string") { tmpgold = tmpgold.replace(',','.');}
+      if(parseFloat(tmpgold) > gold) {
+        gold = parseFloat(tmpgold);
+      }
+      tmpdeath = dataset[i].DeathGame;
+      if(typeof(tmpdeath) == "string") { tmpdeath = tmpdeath.replace(',','.'); }
+      if(parseFloat(tmpdeath) > death) {
+        death = parseFloat(tmpdeath);
+      }
+  }
+  console.log("dealt: " + dealt);
+  console.log("wards: " + wards);
+  console.log("farm: " + farm);
+  console.log("gold: " + gold);
+  console.log("kills: " + kills);
+  console.log("death: " + death);
+  console.log("assist: " + assist);
+
+  return 0;
 }
-
-//Call function to draw the Radar chart
-//Will expect that data is in %'s
-RadarChart.draw("#starplot", d, mycfg);
-
-////////////////////////////////////////////
-/////////// Initiate legend ////////////////
-////////////////////////////////////////////
-
-var svg = d3.select('#body')
-    .selectAll('svg')
-    .append('svg')
-    .attr("width", w+300)
-    .attr("height", h)
-
-//Create the title for the legend
-var text = svg.append("text")
-    .attr("class", "title")
-    .attr('transform', 'translate(90,0)') 
-    .attr("x", w - 70)
-    .attr("y", 10)
-    .attr("font-size", "12px")
-    .attr("fill", "#404040")
-    .text("What % of owners use a specific service in a week");
-
-//Initiate Legend   
-var legend = svg.append("g")
-    .attr("class", "legend")
-    .attr("height", 100)
-    .attr("width", 200)
-    .attr('transform', 'translate(90,20)') 
-    ;
-    //Create colour squares
-    legend.selectAll('rect')
-      .data(LegendOptions)
-      .enter()
-      .append("rect")
-      .attr("x", w - 65)
-      .attr("y", function(d, i){ return i * 20;})
-      .attr("width", 10)
-      .attr("height", 10)
-      .style("fill", function(d, i){ return colorscale(i);})
-      ;
-    //Create text next to squares
-    legend.selectAll('text')
-      .data(LegendOptions)
-      .enter()
-      .append("text")
-      .attr("x", w - 52)
-      .attr("y", function(d, i){ return i * 20 + 9;})
-      .attr("font-size", "11px")
-      .attr("fill", "#737373")
-      .text(function(d) { return d; })
-      ; */

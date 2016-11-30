@@ -12,86 +12,21 @@ const MAX_GOLD = 12493.970097955;
 const MAX_KILLS = 7.987258141;
 const MAX_DEATH = 7.018248175;
 const MAX_ASSIST = 13.951847134;
+const MAX_WINRATE = 0.567102138;
+
 var colorscale = d3.scaleOrdinal(d3.schemeSet1);
 var w = 180, h = 180;
 
 d3.json("championstotal.json", function(data){
 	dataset = data.data;
+
+  barchart();
 });
 
-//You have served well, young function. Your job won't be for nothing. Long live and prosper.
-/*
-//if someone reads this function: i'm really sorry for this code. i'm not proud of it myself.
-function getMax(){
-  var dealt = 0;
-  var wards = 0;
-  var farm = 0;
-  var gold = 0;
-  var kills = 0;
-  var death = 0;
-  var assist = 0;
-
-  //watch out: bad code below this line!
-  var tmpdealt = 0;
-  var tmpassist = 0;
-  var tmpwards = 0;
-  var tmpfarm = 0;
-  var tmpgold = 0;
-  var tmpkills = 0;
-  var tmpdeath = 0;
-  for(i = 0; i < dataset.length ; i++) {
-
-      tmpassist = dataset[i].AssistGame;
-      if(typeof(tmpassist) == "string") { tmpassist = tmpassist.replace(',','.'); }
-      if(parseFloat(tmpassist) > assist) {
-        assist = parseFloat(tmpassist);
-      }
-
-      tmpdealt = dataset[i].DamageChampionGame;
-      if(typeof(tmpdealt) == "string") { tmpdealt = tmpdealt.replace(',','.'); }
-      if(parseFloat(tmpdealt) > dealt) {
-        dealt = parseFloat(tmpdealt);
-      }
-      tmpwards = dataset[i].WardsPlacedGame;
-      if(typeof(tmpwards) == "string") { tmpwards = tmpwards.replace(',','.'); }
-      if(parseFloat(tmpwards) > wards) {
-        wards = parseFloat(tmpwards);
-      }
-      tmpfarm = dataset[i].MinionGame;
-      if(typeof(tmpfarm) == "string") { tmpfarm = tmpfarm.replace(',','.'); }
-      if(parseFloat(tmpfarm) > farm) {
-        farm = parseFloat(tmpfarm);
-      }
-      tmpkills = dataset[i].KillGame;
-      if(typeof(tmpkills) == "string") { tmpkills = tmpkills.replace(',','.');  }
-      if(parseFloat(tmpkills) > kills) {
-        kills = parseFloat(tmpkills);
-      }
-      tmpgold = dataset[i].GoldSpentGame;
-      if(typeof(tmpgold) == "string") { tmpgold = tmpgold.replace(',','.');}
-      if(parseFloat(tmpgold) > gold) {
-        gold = parseFloat(tmpgold);
-      }
-      tmpdeath = dataset[i].DeathGame;
-      if(typeof(tmpdeath) == "string") { tmpdeath = tmpdeath.replace(',','.'); }
-      if(parseFloat(tmpdeath) > death) {
-        death = parseFloat(tmpdeath);
-      }
-  }
-  console.log("dealt: " + dealt);
-  console.log("wards: " + wards);
-  console.log("farm: " + farm);
-  console.log("gold: " + gold);
-  console.log("kills: " + kills);
-  console.log("death: " + death);
-  console.log("assist: " + assist);
-
-  return 0;
-}*/
 
 
 
-
+//------------------------------- SCREEN 1 ------------------------------------
 function clickCircles(stuff) {
 	var child = document.getElementById("champSelLeft").children;
 	var champList = document.getElementById("championsList").children;
@@ -103,15 +38,11 @@ function clickCircles(stuff) {
   document.getElementById("starplot").innerHTML = "";
   document.getElementById("titleTile2").innerHTML = "";
 
-
-
-
 	for(i=0 ; i < child.length ; i++){
 		document.getElementById(child[i].id).className = ("not-highlight");
 	}
 
 	var auxList = checkClicked(stuff.id);
-
 
 	for(i=0; i < champList.length ; i++) {
 		champList[i].style.display = "inline";
@@ -133,9 +64,7 @@ function clickChamps() {
   document.getElementById("starplot").innerHTML = "";
   document.getElementById("titleTile2").innerHTML = "";
 
-
 	clearChampList();
-
 
 	for(i=0; i < champList.length ; i++) {
 		champList[i].style.display = "inline";
@@ -201,7 +130,6 @@ function highlightClickList(element) {
   document.getElementById("titleTile2").innerHTML = champion;
 
   RadarChart.draw("#starplot");
-
 }
 
 function moveCircles(){
@@ -248,42 +176,41 @@ function clearChampList() {
 	}
 }
 
+//------------------------- SCREEN 2 -----------------------------------
 function formatMe(d){
-          var toReturn = 0;
-          switch(d.axis){
-            case ("Minions"):
-              toReturn = d.value*MAX_FARM;
-              break;
+  var toReturn = 0;
+  switch(d.axis){
+    case ("Minions"):
+      toReturn = d.value*MAX_FARM;
+      break;
+    case ("Gold Earned"):
+      toReturn = d.value*MAX_GOLD;
+      break;
+    case ("Kills"):
+      toReturn = d.value*MAX_KILLS;
+      break;
+    case ("Deaths"):
+      toReturn = d.value*MAX_DEATH;
+      break;
+    case ("Wards"):
+      toReturn = d.value*MAX_WARDS;
+      break;
+    case ("Damage Dealt"):
+      toReturn = d.value*MAX_DEALT;
+      break;            
+    case ("Assists"):
+      toReturn = d.value*MAX_ASSIST;
+      break;
+    case ("Win Rate"):
+      toReturn = 100*(d.value*0.26 + 0.3);
+      return "" + (toReturn.toFixed(2)) + "%";
+  }
+  return toReturn.toFixed(2)
+}
 
-            case ("Gold Earned"):
-              toReturn = d.value*MAX_GOLD;
-              break;
-
-            case ("Kills"):
-              toReturn = d.value*MAX_KILLS;
-              break;
-
-            case ("Deaths"):
-              toReturn = d.value*MAX_DEATH;
-              break;
-
-            case ("Wards"):
-              toReturn = d.value*MAX_WARDS;
-              break;
-
-            case ("Damage Dealt"):
-              toReturn = d.value*MAX_DEALT;
-              break;            
-
-            case ("Assists"):
-              toReturn = d.value*MAX_ASSIST;
-              break;
-
-          }
-          return toReturn.toFixed(2)}
-
-
-
+function treatWinRate(wr){
+  return (wr - 0.30) / 0.26;
+}
 
 var RadarChart = {
   draw: function(id){
@@ -299,13 +226,14 @@ var RadarChart = {
 
     var d = [
           [
-            {axis:"Damage Dealt",value: parseFloat(champObject.DamageChampionGame.replace(',','.')) / MAX_DEALT},
+            {axis:"Assists",value: parseFloat(champObject.AssistGame.replace(',','.')) / MAX_ASSIST},
             {axis:"Wards",value: parseFloat(champObject.WardsPlacedGame.replace(',','.')) / MAX_WARDS},
             {axis:"Minions",value: parseFloat(champObject.MinionGame.replace(',','.')) / MAX_FARM},
             {axis:"Gold Earned",value: parseFloat(champObject.GoldSpentGame.replace(',','.')) / MAX_GOLD},
             {axis:"Kills",value: parseFloat(champObject.KillGame.replace(',','.')) / MAX_KILLS},
             {axis:"Deaths",value: parseFloat(champObject.DeathGame.replace(',','.')) / MAX_DEATH},
-            {axis:"Assists",value: parseFloat(champObject.AssistGame.replace(',','.')) / MAX_ASSIST}
+            {axis:"Damage Dealt",value: parseFloat(champObject.DamageChampionGame.replace(',','.')) / MAX_DEALT},
+            {axis:"Win Rate",value: treatWinRate(parseFloat(champObject.WinGame.replace(',','.'))) /*/ MAX_WINRATE*/}
           ]
         ];
 
@@ -502,3 +430,60 @@ var RadarChart = {
                .style('font-size', '20px');
   }
 };
+
+//------------------------- SCREEN 3 -----------------------------------
+
+function barchart() {
+  
+
+  var svg = d3.select("#barChart")
+      .append("svg")
+      .attr("width", 345)
+      .attr("height", 300);
+
+  var xScale = d3.scaleLinear()
+                  .domain([0,1])
+                  .range([0,300]);
+
+  var hScale = d3.scaleLinear()
+                  .domain([dataset.length])
+                  .range([0,300]);
+
+  var yaxis = d3.axisLeft()
+                .scale(hScale);
+
+  var xaxis = d3.axisTop()
+                .scale(xScale.domain([0,100]));
+
+  svg.selectAll("rect")
+      .data(dataset)
+      .enter().append("rect")
+      .attr("text",function(d){return d.ChampionName;})
+      .attr("width", function(d) { return xScale(100*(parseFloat(d.WinGame.replace(',','.'))));})
+      .attr("height", 20)
+      .attr("fill","#488AC7")
+      .attr("y", function(d,i) {return 22 + i*21})
+      .on("mouseover",function(){
+        d3.select(this).attr("fill","black");
+      })
+      .on("mouseout",function(){
+        d3.select(this).attr("fill","#488AC7");
+      });
+
+  svg.append("g")
+      .attr("transform","translate(0,20)")
+      .call(xaxis);
+
+  svg.selectAll("rect").append("title")
+      .data(dataset)
+      .text(function (d){ 
+          return d.ChampionName + " - " + 100*(parseFloat(d.WinGame.replace(',','.')));
+      })
+
+  svg.selectAll("rect")
+      .sort(function(a,b){
+        return d3.descending((parseFloat(a.WinGame.replace(',','.'))), (parseFloat(b.WinGame.replace(',','.'))));
+      })
+      .transition().duration(1000)
+      .attr("y", function(d,i) {return 22 + i*21});
+}

@@ -304,15 +304,49 @@ li a:hover {
 	width: 180px;
 	height: 180px;
 	position: absolute;
-	top: 80px;
+	top: 88px;
 	left: 530px;
 }
 
-.radar-chart-serie0{
+.radar-chart-serie0, .radar-chart-serie1{
 	cursor: pointer;
 }
 
 .tooltipBackground {
 	background-color: white;
 	color:black;
+}
+
+#barSelector {
+	width: 85px;
+	height: 85%;
+	position: relative;
+	top: 40px;
+	left: 5px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    padding: 1px;
+}
+
+.attrBox {
+	text-decoration: none;
+	border: 1px solid black;
+	width: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+#barChart {
+	width: 345px;
+	height: 300px;
+	position: relative;
+	top: -265px;
+	left: 100px;
+}
+
+.barChartHighlight {
+	font-size: 16px;
+	background-color: #488AC7;
 }
