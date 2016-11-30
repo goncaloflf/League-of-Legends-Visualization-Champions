@@ -518,7 +518,7 @@ function barchart() {
       .text(function(d) { 
         switch(barChartOrder){
           case "Win Rate":
-            return "" + d.ChampionName + " - " + ((parseFloat(d.WinGame.replace(',','.')))) + "%";
+            return "" + d.ChampionName + " - " + (100*(parseFloat(d.WinGame.replace(',','.')))) + "%";
           case "Damage Dealt":
             return "" + d.ChampionName + " - " + (parseFloat(d.DamageChampionGame.replace(',','.')));          
           case "Death":
