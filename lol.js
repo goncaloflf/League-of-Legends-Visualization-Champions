@@ -3,8 +3,10 @@ var jun = ["Amumu","Elise","Evelynn","Fiddlesticks","Gragas","Graves","Hecarim",
 var mid = ["Ahri","Akali","Annie","Anivia","Aurelion Sol","Azir","Brand","Cassiopeia","Diana","Ekko","Fizz","Galio","Karthus","Kassadin","Katarina","LeBlanc","Lissandra","Lux","Malzahar","Orianna","Syndra","Taliyah","Talon","Twisted Fate","Veigar","Vel\'Koz","Viktor","Xerath","Yasuo","Zed","Ziggs"]
 var adc = ["Ashe","Caitlyn","Corki","Draven","Ezreal","Jhin","Jinx","Kalista","Kog\'Maw","Lucian","Miss Fortune","Sivir","Tristana","Twitch","Varus","Vayne"]
 var sup = ["Alistar","Bard","Blitzcrank","Braum","Janna","Karma","Leona","Lulu","Morgana","Nami","Nautilus","Sona","Soraka","Tahm Kench","Taric","Thresh","Zilean","Zyra"]
-var currentChamp = "Nami";
+var currentChamp = "";
 var dataset;
+var barChartOrder = "Win Rate";
+
 const MAX_DEALT = 29000.321167883;
 const MAX_WARDS = 27.114444278;
 const MAX_FARM = 221.382937212;
@@ -431,7 +433,24 @@ var RadarChart = {
   }
 };
 
-//------------------------- SCREEN 3 -----------------------------------
+//------------------------- SCREEN 4 -----------------------------------
+
+function changeBarChart(element) {
+  //Do nothing if clicked on the current button
+  if(element.innerHTML == barChartOrder){
+      return 0;
+    } else {
+      barChartOrder = element.innerHTML;
+      $("#barChart").empty();
+      $(element).addClass("barChartHighlight");
+      $(element).siblings().removeClass("barChartHighlight");
+      barchart();
+    }
+
+
+
+}
+
 
 function barchart() {
   
@@ -459,7 +478,27 @@ function barchart() {
       .data(dataset)
       .enter().append("rect")
       .attr("text",function(d){return d.ChampionName;})
-      .attr("width", function(d) { return xScale(100*(parseFloat(d.WinGame.replace(',','.'))));})
+      .attr("width", function(d) { 
+        switch(barChartOrder){
+          case "Win Rate":
+            return xScale(100*(parseFloat(d.WinGame.replace(',','.'))));
+          case "Damage Dealt":
+            return xScale(100*parseFloat(d.DamageChampionGame.replace(',','.')) / MAX_DEALT);          
+          case "Death":
+            return xScale(100* parseFloat(d.DeathGame.replace(',','.')) / MAX_DEATH);          
+          case "Assist":
+            return xScale(100* parseFloat(d.AssistGame.replace(',','.')) / MAX_ASSIST);
+          case "Farm":
+            return xScale(100* parseFloat(d.MinionGame.replace(',','.')) / MAX_FARM);
+          case "Gold Spent":
+            return xScale(100* parseFloat(d.GoldSpentGame.replace(',','.')) / MAX_GOLD);
+          case "Kill":
+            return xScale(100* parseFloat(d.KillGame.replace(',','.')) / MAX_KILLS);
+          case "Wards":
+            return xScale(100* parseFloat(d.WardsPlacedGame.replace(',','.')) / MAX_WARDS);
+
+          }
+        })
       .attr("height", 20)
       .attr("fill","#488AC7")
       .attr("y", function(d,i) {return 22 + i*21})
@@ -472,18 +511,62 @@ function barchart() {
 
   svg.append("g")
       .attr("transform","translate(0,20)")
-      .call(xaxis);
+      .text(function() { return barChartOrder;});
 
   svg.selectAll("rect").append("title")
       .data(dataset)
-      .text(function (d){ 
-          return d.ChampionName + " - " + 100*(parseFloat(d.WinGame.replace(',','.')));
-      })
+      .text(function(d) { 
+        switch(barChartOrder){
+          case "Win Rate":
+            return "" + d.ChampionName + " - " + ((parseFloat(d.WinGame.replace(',','.')))) + "%";
+          case "Damage Dealt":
+            return "" + d.ChampionName + " - " + (parseFloat(d.DamageChampionGame.replace(',','.')));          
+          case "Death":
+            return "" + d.ChampionName + " - " + (parseFloat(d.DeathGame.replace(',','.')) );          
+          case "Assist":
+            return "" + d.ChampionName + " - " + (parseFloat(d.AssistGame.replace(',','.')));
+          case "Farm":
+            return "" + d.ChampionName + " - " + (parseFloat(d.MinionGame.replace(',','.')));
+          case "Gold Spent":
+            return "" + d.ChampionName + " - " + (parseFloat(d.GoldSpentGame.replace(',','.')));
+          case "Kill":
+            return "" + d.ChampionName + " - " + (parseFloat(d.KillGame.replace(',','.')));
+          case "Wards":
+            return "" + d.ChampionName + " - " + (parseFloat(d.WardsPlacedGame.replace(',','.')));
+          }
+        })
 
   svg.selectAll("rect")
-      .sort(function(a,b){
+      .sort(function(a,b) { 
+        switch(barChartOrder){
+          case "Win Rate":
+            return d3.descending((parseFloat(a.WinGame.replace(',','.'))), (parseFloat(b.WinGame.replace(',','.'))));
+          case "Damage Dealt":
+            return d3.descending((parseFloat(a.DamageChampionGame.replace(',','.'))),(parseFloat(b.DamageChampionGame.replace(',','.'))));          
+          case "Death":
+            return d3.descending((parseFloat(a.DeathGame.replace(',','.'))),(parseFloat(b.DeathGame.replace(',','.'))));          
+          case "Assist":
+            return d3.descending((parseFloat(a.AssistGame.replace(',','.'))),(parseFloat(b.AssistGame.replace(',','.'))));          
+          case "Farm":
+            return d3.descending((parseFloat(a.MinionGame.replace(',','.'))),(parseFloat(b.MinionGame.replace(',','.'))));          
+          case "Gold Spent":
+            return d3.descending((parseFloat(a.GoldSpentGame.replace(',','.'))),(parseFloat(b.GoldSpentGame.replace(',','.'))));          
+          case "Kill":
+            return d3.descending((parseFloat(a.KillGame.replace(',','.'))),(parseFloat(b.KillGame.replace(',','.'))));          
+          case "Wards":
+            return d3.descending((parseFloat(a.WardsPlacedGame.replace(',','.'))),(parseFloat(b.WardsPlacedGame.replace(',','.'))));          
+          }
+        }
+
+
+
+
+
+
+
+      /*function(a,b){
         return d3.descending((parseFloat(a.WinGame.replace(',','.'))), (parseFloat(b.WinGame.replace(',','.'))));
-      })
-      .transition().duration(1000)
+      }*/)
+      .transition().duration(1500)
       .attr("y", function(d,i) {return 22 + i*21});
 }
