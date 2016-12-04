@@ -506,7 +506,7 @@ function barchart() {
       .attr("fill","#488AC7")
       .attr("y", function(d,i) {return 22 + i*21})
       .on("mouseover",function(){
-        d3.select(this).attr("fill","red");
+        d3.select(this).attr("fill","rgb(160, 160, 160)");
       })
       .on("mouseout",function(){
         d3.select(this).attr("fill","#488AC7");

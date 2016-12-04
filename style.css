@@ -332,12 +332,26 @@ li a:hover {
     overflow-y: hidden;
     overflow-x: hidden;
     padding: 1px;
+    background-color: rgb(255, 255, 255)
 }
 
 .attrBox {
-	text-decoration: none;
 	border: 1px solid black;
 	width: 100%;
+	color: #fff;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-size: 14px;
+	-webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+	-moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+	-o-transition: font-size 0.3s ease, background-color 0.3s ease;
+	-ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+	transition: font-size 0.3s ease, background-color 0.3s ease;
+	background-color: rgb(50, 50, 50)
+}
+
+.attrBox:hover{
+	font-size: 17px;
+	background-color: rgb(160, 160, 160);
 }
 
 a {
