@@ -429,7 +429,10 @@ var RadarChart = {
                .style('background-color', '#ff0000')
                .style('opacity', 0)
                .style('font-family', 'sans-serif')
-               .style('font-size', '20px');
+               .style('font-size', '20px')
+               .style('text-shadow','2px 0px 0px rgb(255, 255, 255), -2px 0px 0px rgb(255, 255, 255), 0px 2px 0px rgb(255, 255, 255), 0px -2px 0px rgb(255, 255, 255), 1px 1px rgb(255, 255, 255), -1px -1px 0px rgb(255, 255, 255), 1px -1px 0px rgb(255, 255, 255), -1px 1px 0px rgb(255, 255, 255)')
+               ;
+
   }
 };
 
@@ -503,7 +506,7 @@ function barchart() {
       .attr("fill","#488AC7")
       .attr("y", function(d,i) {return 22 + i*21})
       .on("mouseover",function(){
-        d3.select(this).attr("fill","black");
+        d3.select(this).attr("fill","red");
       })
       .on("mouseout",function(){
         d3.select(this).attr("fill","#488AC7");
@@ -535,6 +538,8 @@ function barchart() {
             return "" + d.ChampionName + " - " + (parseFloat(d.WardsPlacedGame.replace(',','.')));
           }
         })
+
+  
 
   svg.selectAll("rect")
       .sort(function(a,b) { 
