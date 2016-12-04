@@ -102,6 +102,12 @@ tr {
 	height: 316.3px;
 }
 
+.container h4 {
+	position: fixed;
+	margin-left: 25px;
+	margin-top: 10px;
+}
+
 #championsCircle {
 	position: relative;
     top: 158.15px;
