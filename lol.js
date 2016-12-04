@@ -487,15 +487,15 @@ function barchart() {
             return xScale(100*(parseFloat(d.WinGame.replace(',','.'))));
           case "Damage Dealt":
             return xScale(100*parseFloat(d.DamageChampionGame.replace(',','.')) / MAX_DEALT);          
-          case "Death":
+          case "Deaths":
             return xScale(100* parseFloat(d.DeathGame.replace(',','.')) / MAX_DEATH);          
-          case "Assist":
+          case "Assists":
             return xScale(100* parseFloat(d.AssistGame.replace(',','.')) / MAX_ASSIST);
-          case "Farm":
+          case "Minions":
             return xScale(100* parseFloat(d.MinionGame.replace(',','.')) / MAX_FARM);
-          case "Gold Spent":
+          case "Gold Earned":
             return xScale(100* parseFloat(d.GoldSpentGame.replace(',','.')) / MAX_GOLD);
-          case "Kill":
+          case "Kills":
             return xScale(100* parseFloat(d.KillGame.replace(',','.')) / MAX_KILLS);
           case "Wards":
             return xScale(100* parseFloat(d.WardsPlacedGame.replace(',','.')) / MAX_WARDS);
@@ -524,15 +524,15 @@ function barchart() {
             return "" + d.ChampionName + " - " + (100*(parseFloat(d.WinGame.replace(',','.')))) + "%";
           case "Damage Dealt":
             return "" + d.ChampionName + " - " + (parseFloat(d.DamageChampionGame.replace(',','.')));          
-          case "Death":
+          case "Deaths":
             return "" + d.ChampionName + " - " + (parseFloat(d.DeathGame.replace(',','.')) );          
-          case "Assist":
+          case "Assists":
             return "" + d.ChampionName + " - " + (parseFloat(d.AssistGame.replace(',','.')));
-          case "Farm":
+          case "Minions":
             return "" + d.ChampionName + " - " + (parseFloat(d.MinionGame.replace(',','.')));
-          case "Gold Spent":
+          case "Gold Earned":
             return "" + d.ChampionName + " - " + (parseFloat(d.GoldSpentGame.replace(',','.')));
-          case "Kill":
+          case "Kills":
             return "" + d.ChampionName + " - " + (parseFloat(d.KillGame.replace(',','.')));
           case "Wards":
             return "" + d.ChampionName + " - " + (parseFloat(d.WardsPlacedGame.replace(',','.')));
@@ -548,15 +548,15 @@ function barchart() {
             return d3.descending((parseFloat(a.WinGame.replace(',','.'))), (parseFloat(b.WinGame.replace(',','.'))));
           case "Damage Dealt":
             return d3.descending((parseFloat(a.DamageChampionGame.replace(',','.'))),(parseFloat(b.DamageChampionGame.replace(',','.'))));          
-          case "Death":
+          case "Deaths":
             return d3.descending((parseFloat(a.DeathGame.replace(',','.'))),(parseFloat(b.DeathGame.replace(',','.'))));          
-          case "Assist":
+          case "Assists":
             return d3.descending((parseFloat(a.AssistGame.replace(',','.'))),(parseFloat(b.AssistGame.replace(',','.'))));          
-          case "Farm":
+          case "Minions":
             return d3.descending((parseFloat(a.MinionGame.replace(',','.'))),(parseFloat(b.MinionGame.replace(',','.'))));          
-          case "Gold Spent":
+          case "Gold Earned":
             return d3.descending((parseFloat(a.GoldSpentGame.replace(',','.'))),(parseFloat(b.GoldSpentGame.replace(',','.'))));          
-          case "Kill":
+          case "Kills":
             return d3.descending((parseFloat(a.KillGame.replace(',','.'))),(parseFloat(b.KillGame.replace(',','.'))));          
           case "Wards":
             return d3.descending((parseFloat(a.WardsPlacedGame.replace(',','.'))),(parseFloat(b.WardsPlacedGame.replace(',','.'))));          
