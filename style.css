@@ -350,3 +350,15 @@ a {
 	font-size: 16px;
 	background-color: #488AC7;
 }
+
+div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    width: 150px;					
+    height: 30px;					
+    padding: 2px;				
+    font: 15px Arial;		
+    background: lightsteelblue;	
+    border: 1px solid black;		
+    pointer-events: none;			
+}
