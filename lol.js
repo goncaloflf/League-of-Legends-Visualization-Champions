@@ -429,7 +429,10 @@ var RadarChart = {
                .style('background-color', '#ff0000')
                .style('opacity', 0)
                .style('font-family', 'sans-serif')
-               .style('font-size', '20px');
+               .style('font-size', '20px')
+               .style('text-shadow','2px 0px 0px rgb(255, 255, 255), -2px 0px 0px rgb(255, 255, 255), 0px 2px 0px rgb(255, 255, 255), 0px -2px 0px rgb(255, 255, 255), 1px 1px rgb(255, 255, 255), -1px -1px 0px rgb(255, 255, 255), 1px -1px 0px rgb(255, 255, 255), -1px 1px 0px rgb(255, 255, 255)')
+               ;
+
   }
 };
 
@@ -490,15 +493,15 @@ function barchart() {
             return xScale(100*(parseFloat(d.WinGame.replace(',','.'))));
           case "Damage Dealt":
             return xScale(100*parseFloat(d.DamageChampionGame.replace(',','.')) / MAX_DEALT);          
-          case "Death":
+          case "Deaths":
             return xScale(100* parseFloat(d.DeathGame.replace(',','.')) / MAX_DEATH);          
-          case "Assist":
+          case "Assists":
             return xScale(100* parseFloat(d.AssistGame.replace(',','.')) / MAX_ASSIST);
-          case "Farm":
+          case "Minions":
             return xScale(100* parseFloat(d.MinionGame.replace(',','.')) / MAX_FARM);
-          case "Gold Spent":
+          case "Gold Earned":
             return xScale(100* parseFloat(d.GoldSpentGame.replace(',','.')) / MAX_GOLD);
-          case "Kill":
+          case "Kills":
             return xScale(100* parseFloat(d.KillGame.replace(',','.')) / MAX_KILLS);
           case "Wards":
             return xScale(100* parseFloat(d.WardsPlacedGame.replace(',','.')) / MAX_WARDS);
@@ -510,12 +513,11 @@ function barchart() {
       .attr("y", function(d,i) {return 22 + i*21})
       .attr("x", 10)
       .on("mouseover",function(d){
-        d3.select(this).attr("fill","black");
+        d3.select(this).attr("fill","rgb(160, 160, 160)");
         div.transition().duration(100).style("opacity",1.0);
         div.html(formatTooltip(d))
           .style("left", (d3.event.pageX) + "px")   
           .style("top", (d3.event.pageY - 28) + "px");;
-      })
       .on("mouseout",function(){
         d3.select(this).attr("fill","#488AC7");
         div.transition().duration(100).style("opacity",0.0);
@@ -525,29 +527,6 @@ function barchart() {
       .attr("transform","translate(0,20)")
       .text(function() { return barChartOrder;});
 
-  /*svg.selectAll("rect").append("title")
-      .data(dataset)
-      .text(function(d) { 
-        switch(barChartOrder){
-          case "Win Rate":
-            return "" + d.ChampionName + " - " + (100*(parseFloat(d.WinGame.replace(',','.')))).toFixed(2) + "%";
-          case "Damage Dealt":
-            return "" + d.ChampionName + " - " + (parseFloat(d.DamageChampionGame.replace(',','.'))).toFixed(2);          
-          case "Death":
-            return "" + d.ChampionName + " - " + (parseFloat(d.DeathGame.replace(',','.'))).toFixed(2);          
-          case "Assist":
-            return "" + d.ChampionName + " - " + (parseFloat(d.AssistGame.replace(',','.'))).toFixed(2);
-          case "Farm":
-            return "" + d.ChampionName + " - " + (parseFloat(d.MinionGame.replace(',','.'))).toFixed(2);
-          case "Gold Spent":
-            return "" + d.ChampionName + " - " + (parseFloat(d.GoldSpentGame.replace(',','.'))).toFixed(2);
-          case "Kill":
-            return "" + d.ChampionName + " - " + (parseFloat(d.KillGame.replace(',','.'))).toFixed(2);
-          case "Wards":
-            return "" + d.ChampionName + " - " + (parseFloat(d.WardsPlacedGame.replace(',','.'))).toFixed(2);
-          }
-        })*/
-
   svg.selectAll("rect")
       .sort(function(a,b) { 
         switch(barChartOrder){
@@ -555,15 +534,15 @@ function barchart() {
             return d3.descending((parseFloat(a.WinGame.replace(',','.'))), (parseFloat(b.WinGame.replace(',','.'))));
           case "Damage Dealt":
             return d3.descending((parseFloat(a.DamageChampionGame.replace(',','.'))),(parseFloat(b.DamageChampionGame.replace(',','.'))));          
-          case "Death":
+          case "Deaths":
             return d3.descending((parseFloat(a.DeathGame.replace(',','.'))),(parseFloat(b.DeathGame.replace(',','.'))));          
-          case "Assist":
+          case "Assists":
             return d3.descending((parseFloat(a.AssistGame.replace(',','.'))),(parseFloat(b.AssistGame.replace(',','.'))));          
-          case "Farm":
+          case "Minions":
             return d3.descending((parseFloat(a.MinionGame.replace(',','.'))),(parseFloat(b.MinionGame.replace(',','.'))));          
-          case "Gold Spent":
+          case "Gold Earned":
             return d3.descending((parseFloat(a.GoldSpentGame.replace(',','.'))),(parseFloat(b.GoldSpentGame.replace(',','.'))));          
-          case "Kill":
+          case "Kills":
             return d3.descending((parseFloat(a.KillGame.replace(',','.'))),(parseFloat(b.KillGame.replace(',','.'))));          
           case "Wards":
             return d3.descending((parseFloat(a.WardsPlacedGame.replace(',','.'))),(parseFloat(b.WardsPlacedGame.replace(',','.'))));          
