@@ -380,5 +380,6 @@ div.tooltip {
     font: 15px Arial;		
     background: lightsteelblue;	
     border: 1px solid black;		
-    pointer-events: none;			
+    pointer-events: none;
+    color: black;			
 }
