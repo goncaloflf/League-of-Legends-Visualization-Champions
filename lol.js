@@ -435,6 +435,10 @@ var RadarChart = {
   }
 };
 
+//------------------------- SCREEN 3 -----------------------------------
+
+
+
 //------------------------- SCREEN 4 -----------------------------------
 
 function changeBarChart(element) {
@@ -448,9 +452,6 @@ function changeBarChart(element) {
       $(element).siblings().removeClass("barChartHighlight");
       barchart();
     }
-
-
-
 }
 
 
@@ -569,7 +570,7 @@ function barchart() {
             if(barChartAsc){
               return d3.ascending((parseFloat(a.KillGame.replace(',','.'))),(parseFloat(b.KillGame.replace(',','.'))));          
             } else {
-              return d3.ascending((parseFloat(a.KillGame.replace(',','.'))),(parseFloat(b.KillGame.replace(',','.'))));          
+              return d3.descending((parseFloat(a.KillGame.replace(',','.'))),(parseFloat(b.KillGame.replace(',','.'))));          
             }
           case "Wards":
             if(barChartAsc){
@@ -605,8 +606,9 @@ function formatTooltip(d) {
 }
 
 function changeOrder(element) {
-  if((element.innerHTML == "&#8593" && barChartAsc) || (element.innerHTML == "&#8595" && !barChartAsc)) {return 0;}
+  if((element.getAttribute("name") == "asc" && barChartAsc) || (element.getAttribute("name") == "dsc" && !barChartAsc)) {return 0;}
   barChartAsc = !barChartAsc;
   $("#barChart").empty();
   barchart();
 }
+

@@ -115,16 +115,15 @@ tr {
     transform: translateX(-50%) translateY(-50%);
     width: 150px;
     height: 150px;
-	border:1px solid #fab6b6;
     border-radius: 75px;
-	background-color:#ff0000;
+	background-color:#007bff;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 150px;
 	cursor: pointer;
 	text-decoration:none;
 	color:#ffffff;
-	background-image: url('images/league.jpg');
+	background-image: url('images/leaguelogo.png');
 	background-size: 173px;
 	background-position-x: -10px;
 	background-position-y: -11px;
@@ -148,7 +147,7 @@ tr {
 	line-height: 75px;
 	cursor: pointer;
 	border:1px solid black;
-	background-color:#FF9900;
+	background-color:#007bff;
 	color:#ffffff;
 	text-decoration:none;
 	background-image:url('images/support_item.png');
@@ -169,7 +168,7 @@ tr {
     height: 75px;
 	border:1px solid black;
     border-radius: 37.5px;
-	background-color:#FF9900;
+	background-color:#007bff;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 75px;
@@ -190,7 +189,7 @@ tr {
     width: 75px;
     height: 75px;
     border-radius: 37.5px;
-	background: yellow;
+	background: #007bff;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 75px;
@@ -217,7 +216,7 @@ tr {
 	height: 75px;
 	border-radius: 37.5px;
 	border:1px solid black;
-	background-color:#FF9900;
+	background-color:#007bff;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 75px;
@@ -242,7 +241,7 @@ tr {
     width: 75px;
     height: 75px;
     border-radius: 37.5px;
-	background: #FF9900;
+	background: #007bff;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 75px;
@@ -352,6 +351,11 @@ li a:hover {
 .attrBox:hover{
 	font-size: 17px;
 	background-color: rgb(160, 160, 160);
+}
+
+.barChartHighlight:hover{
+	font-size: 16px;
+	background-color: #488AC7;
 }
 
 a {
