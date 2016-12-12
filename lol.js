@@ -524,30 +524,16 @@ function barchart() {
           }
         })
       .attr("height", function(d){
-        if(!displayTop && topl.indexOf(d.ChampionName) >= 0){
-          drawn = false;
-          notDrawn += 1;
-          return 0;
-        } else if(!displayMid && mid.indexOf(d.ChampionName) >= 0){
-          drawn = false;
-          notDrawn += 1;
-          return 0;
-        } else if(!displayAdc && adc.indexOf(d.ChampionName) >= 0){
-          drawn = false;
-          notDrawn += 1;
-          return 0;
-        } else if(!displayJun && jun.indexOf(d.ChampionName) >= 0){
-          drawn = false;
-          notDrawn += 1;
-          return 0;
-        } else if(!displaySup && sup.indexOf(d.ChampionName)>= 0){
-          drawn = false;
+        if((!displayTop && topl.indexOf(d.ChampionName) >= 0) || 
+            (!displayMid && mid.indexOf(d.ChampionName) >= 0) ||
+            (!displayAdc && adc.indexOf(d.ChampionName) >= 0) || 
+            (!displaySup && sup.indexOf(d.ChampionName) >= 0) ||
+            (!displayJun && jun.indexOf(d.ChampionName) >= 0)){
+          d3.select(this).remove();
           return 0;
         } else {
-          drawn = true;
           return 20;
-        }
-      })
+        }})
       .attr("fill",function(d){
         var champAux = d.ChampionName;
         if(topl.indexOf(champAux) >= 0){
