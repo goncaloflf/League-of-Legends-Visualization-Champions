@@ -7,6 +7,11 @@ var currentChamp = "";
 var dataset;
 var barChartOrder = "Win Rate";
 var barChartAsc = false;
+var displayTop;
+var displayMid;
+var displayAdc;
+var displaySup;
+var displayJun;
 
 const MAX_DEALT = 29000.321167883;
 const MAX_WARDS = 27.114444278;
@@ -22,10 +27,17 @@ var w = 180, h = 180;
 
 d3.json("championstotal.json", function(data){
 	dataset = data.data;
-
+  sanityToggles();
   barchart();
 });
 
+function sanityToggles(){
+  displayTop = document.getElementById("topCheckBox").checked;
+  displayMid = document.getElementById("midCheckBox").checked;
+  displayAdc = document.getElementById("adcCheckBox").checked;
+  displaySup = document.getElementById("supCheckBox").checked;
+  displayJun = document.getElementById("junCheckBox").checked;
+}
 
 
 
@@ -458,7 +470,8 @@ function changeBarChart(element) {
 
 
 function barchart() {
-  
+  var notDrawn = 0;
+  var drawn;
 
   var svg = d3.select("#barChart")
       .append("svg")
@@ -510,7 +523,31 @@ function barchart() {
 
           }
         })
-      .attr("height", 20)
+      .attr("height", function(d){
+        if(!displayTop && topl.indexOf(d.ChampionName) >= 0){
+          drawn = false;
+          notDrawn += 1;
+          return 0;
+        } else if(!displayMid && mid.indexOf(d.ChampionName) >= 0){
+          drawn = false;
+          notDrawn += 1;
+          return 0;
+        } else if(!displayAdc && adc.indexOf(d.ChampionName) >= 0){
+          drawn = false;
+          notDrawn += 1;
+          return 0;
+        } else if(!displayJun && jun.indexOf(d.ChampionName) >= 0){
+          drawn = false;
+          notDrawn += 1;
+          return 0;
+        } else if(!displaySup && sup.indexOf(d.ChampionName)>= 0){
+          drawn = false;
+          return 0;
+        } else {
+          drawn = true;
+          return 20;
+        }
+      })
       .attr("fill",function(d){
         var champAux = d.ChampionName;
         if(topl.indexOf(champAux) >= 0){
@@ -525,7 +562,6 @@ function barchart() {
           return "#0091d3";
         }
       })
-      .attr("y", function(d,i) {return 22 + i*21})
       .attr("x", 10)
       .on("mouseover",function(d){
         tmpColor = d3.select(this).attr("fill");
@@ -599,7 +635,7 @@ function barchart() {
           }
         })
       .transition().duration(500)
-      .attr("y", function(d,i) {return 22 + i*21});
+      .attr("y", function(d,i) {return 6 + i*21});
 }
 
 function formatTooltip(d) { 
@@ -630,3 +666,21 @@ function changeOrder(element) {
   barchart();
 }
 
+function orderBarChart() {
+  var inputList = $("#barChartSelector").find("input");
+  for( i=0 ; i< inputList.length ; i++){
+    if(inputList[i].id == "midCheckBox"){
+      displayMid = inputList[i].checked;
+    } else if(inputList[i].id == "adcCheckBox"){
+      displayAdc = inputList[i].checked;
+    } else if(inputList[i].id == "topCheckBox"){
+      displayTop = inputList[i].checked;
+    } else if(inputList[i].id == "supCheckBox"){
+      displaySup = inputList[i].checked;
+    } else if(inputList[i].id == "junCheckBox"){
+      displayJun = inputList[i].checked;
+    }
+  }
+  $("#barChart").empty();
+  barchart();
+}
