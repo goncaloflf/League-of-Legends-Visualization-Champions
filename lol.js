@@ -442,6 +442,8 @@ var RadarChart = {
 //------------------------- SCREEN 4 -----------------------------------
 
 function changeBarChart(element) {
+  var tmpColor;
+
   //Do nothing if clicked on the current button
   if(element.innerHTML == barChartOrder){
       return 0;
@@ -509,17 +511,33 @@ function barchart() {
           }
         })
       .attr("height", 20)
-      .attr("fill","#488AC7")
+      .attr("fill",function(d){
+        var champAux = d.ChampionName;
+        if(topl.indexOf(champAux) >= 0){
+          return "#8b7426";
+        } else if(mid.indexOf(champAux) >= 0){
+          return "#2c408b";
+        } else if(adc.indexOf(champAux) >= 0){
+          return "#000000";
+        } else if(jun.indexOf(champAux) >= 0){
+          return "#ffaa00";
+        } else if(sup.indexOf(champAux) >= 0){
+          return "#0091d3";
+        }
+      })
       .attr("y", function(d,i) {return 22 + i*21})
       .attr("x", 10)
       .on("mouseover",function(d){
+        tmpColor = d3.select(this).attr("fill");
         d3.select(this).attr("fill","rgb(160, 160, 160)");
+        //d3.select(this).attr("height",40);
         div.transition().duration(100).style("opacity",1.0);
         div.html(formatTooltip(d))
           .style("left", (d3.event.pageX) + "px")   
           .style("top", (d3.event.pageY - 30) + "px");})
       .on("mouseout",function(){
-        d3.select(this).attr("fill","#488AC7");
+        //d3.select(this).attr("height",20);
+        d3.select(this).attr("fill",tmpColor);
         div.transition().duration(100).style("opacity",0.0);
       });
 
