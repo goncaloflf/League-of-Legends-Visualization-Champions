@@ -477,3 +477,34 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/*END SLIDER CUSTOMIZATION*/
+
+#secondPlace {
+	width: 100px;
+	height: 139px;
+	position: absolute;
+	top: 400px;
+	left: 520px;
+}
+
+#firstPlace {
+	width: 100px;
+	height: 139px;
+	position: absolute;
+	top: 355px;
+	left: 640px;
+}
+
+#thirdPlace {
+	width: 100px;
+	height: 139px;
+	position: absolute;
+	top: 420px;
+	left: 760px;
+}
+
+.medal {
+	max-width: 100%;
+	max-height: 100%;
+}
