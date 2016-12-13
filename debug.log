@@ -1,0 +1,3 @@
+[1127/202914:ERROR:crash_report_database_win.cc(562)] CreateDirectory C:\Program Files (x86)\Easthas\Reports\Dump: O sistema não conseguiu localizar o caminho especificado. (0x3)
+[1127/202914:ERROR:registration_protocol_win.cc(82)] TransactNamedPipe: O encaminhamento (pipe) foi terminado. (0x6D)
+[1127/202914:ERROR:crash_report_database_win.cc(562)] CreateDirectory C:\Program Files (x86)\Easthas\Reports\Dump: O sistema não conseguiu localizar o caminho especificado. (0x3)
