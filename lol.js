@@ -470,6 +470,8 @@ function changeBarChart(element) {
       $(element).siblings().removeClass("barChartHighlight");
       barchart();
     }
+
+    updateHallFame();
 }
 
 
@@ -654,6 +656,8 @@ function changeOrder(element) {
   barChartAsc = !barChartAsc;
   $("#barChart").empty();
   barchart();
+  updateHallFame();
+
 }
 
 function orderBarChart() {
@@ -675,80 +679,50 @@ function orderBarChart() {
   }
   $("#barChart").empty();
   barchart();
+  updateHallFame();
+}
 
-  if(displayJun && displayTop){
-     $("#firstImage").attr("src","images/nidaleemedal.png");
-     $("#secondImage").attr("src","images/singedmedal.png");
-     $("#thirdImage").attr("src","images/reksaimedal.png");
-  } 
-  else if(!displayJun && displayTop && displayAdc){
-     $("#firstImage").attr("src","images/singedmedal.png");
-     $("#secondImage").attr("src","images/kogmedal.png");
-     $("#thirdImage").attr("src","images/pantheonmedal.png");
-  } 
-  else if(!displayJun && !displayTop && displayAdc && displaySup){
-     $("#firstImage").attr("src","images/kogmedal.png");
-     $("#secondImage").attr("src","images/kalistamedal.png");
-     $("#thirdImage").attr("src","images/sonamedal.png");
-  } 
-  else if(!displayJun && !displayTop && !displayAdc && displaySup && displayMid){
-     $("#firstImage").attr("src","images/sonamedal.png");
-     $("#secondImage").attr("src","images/jannamedal.png");
-     $("#thirdImage").attr("src","images/aurelionmedal.png");
-  } 
-  else if(displayJun && !displayTop && !displayAdc){
-     $("#firstImage").attr("src","images/nidaleemedal.png");
-     $("#secondImage").attr("src","images/reksaimedal.png");
-     $("#thirdImage").attr("src","images/sejuanimedal.png");
+function updateHallFame(){
+  var rectList = $("#barChart").find("rect");
+  if(rectList.length == 0){
+    $("#medalone").attr("src","champions/blank.gif");
+    $("#medaltwo").attr("src","champions/blank.gif");
+    $("#medalthree").attr("src","champions/blank.gif");
+
+    $("#firstImage").attr("src","champions/blank.gif");
+    $("#secondImage").attr("src","champions/blank.gif");
+    $("#thirdImage").attr("src","champions/blank.gif");
+
+    $("#firstLegend").html("");
+    $("#secondLegend").html("");
+    $("#thirdLegend").html("");
+    return 0; 
   }
-  else if(displayJun && !displayTop && displayAdc){
-     $("#firstImage").attr("src","images/nidaleemedal.png");
-     $("#secondImage").attr("src","images/reksaimedal.png");
-     $("#thirdImage").attr("src","images/kogmedal.png");
+
+  var first = rectList[0];
+  var second = rectList[1];
+  var third = rectList[2];
+  
+  $("#medalone").attr("src","images/firstplace.png");
+  $("#medaltwo").attr("src","images/secondplace.png");
+  $("#medalthree").attr("src","images/thirdplace.png");
+
+
+  for(j = 0; j < rectList.length; j++){
+    if(rectList[j].getAttribute("y") < first.getAttribute("y")){
+      first = rectList[j];
+    } else if(rectList[j].getAttribute("y") < second.getAttribute("y") && rectList[j].getAttribute("y") > first.getAttribute("y")){
+      second = rectList[j];
+    } else if(rectList[j].getAttribute("y") < second.getAttribute("y") && rectList[j].getAttribute("y") > second.getAttribute("y") && rectList[j].getAttribute("y") > first.getAttribute("y")){
+      third = rectList[j];
+    }
   }
-  else if(!displayJun && !displayTop && !displayAdc && !displaySup && !displayMid){
-     $("#firstImage").attr("src","champions/blank.gif");
-     $("#secondImage").attr("src","champions/blank.gif");
-     $("#thirdImage").attr("src","champions/blank.gif");
-  }
-  else if(!displayJun && !displayTop && !displayAdc && !displaySup && displayMid){
-     $("#firstImage").attr("src","images/aurelionmedal.png");
-     $("#secondImage").attr("src","images/akalimedal.png");
-     $("#thirdImage").attr("src","images/yasuomedal.png");
-  } 
-  else if(!displayJun && displayTop && !displayAdc && !displaySup && !displayMid){
-     $("#firstImage").attr("src","images/singedmedal.png");
-     $("#secondImage").attr("src","images/pantheonmedal.png");
-     $("#thirdImage").attr("src","images/gangplankmedal.png");
-  }  
-  else if(!displayJun && !displayTop && displayAdc && !displaySup && !displayMid){
-     $("#firstImage").attr("src","images/kogmedal.png");
-     $("#secondImage").attr("src","images/kalistamedal.png");
-     $("#thirdImage").attr("src","images/twitchmedal.png");
-  }  
-  else if(!displayJun && !displayTop && !displayAdc && displaySup && !displayMid){
-     $("#firstImage").attr("src","images/sonamedal.png");
-     $("#secondImage").attr("src","images/jannamedal.png");
-     $("#thirdImage").attr("src","images/sorakamedal.png");
-  }
-  else if(!displayJun && !displayTop && displayAdc && !displaySup && displayMid){
-     $("#firstImage").attr("src","images/kogmedal.png");
-     $("#secondImage").attr("src","images/kalistamedal.png");
-     $("#thirdImage").attr("src","images/aurelionmedal.png");
-  }
-  else if(!displayJun && displayTop && !displayAdc && !displaySup && displayMid){
-     $("#firstImage").attr("src","images/singedmedal.png");
-     $("#secondImage").attr("src","images/pantheonmedal.png");
-     $("#thirdImage").attr("src","images/aurelionmedal.png");
-  }
-  else if(!displayJun && displayTop && !displayAdc && displaySup){
-     $("#firstImage").attr("src","images/singedmedal.png");
-     $("#secondImage").attr("src","images/pantheonmedal.png");
-     $("#thirdImage").attr("src","images/sonamedal.png");
-  }
-  else{
-     $("#firstImage").attr("src","champions/blank.gif");
-     $("#secondImage").attr("src","champions/blank.gif");
-     $("#thirdImage").attr("src","champions/blank.gif");
-  }   
+
+  $("#firstImage").attr("src","champions/" + first.getAttribute("text") + "_Square_0.png");
+  $("#secondImage").attr("src","champions/" + second.getAttribute("text") + "_Square_0.png");
+  $("#thirdImage").attr("src","champions/" + third.getAttribute("text") + "_Square_0.png");
+
+  $("#firstLegend").html(first.getAttribute("text"));
+  $("#secondLegend").html(second.getAttribute("text"));
+  $("#thirdLegend").html(third.getAttribute("text"));
 }
