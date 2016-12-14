@@ -374,6 +374,9 @@ a {
 	position: relative;
 	top: -265px;
 	left: 100px;
+	display: block;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .barChartHighlight {
@@ -481,26 +484,26 @@ input:checked + .slider:before {
 /*END SLIDER CUSTOMIZATION*/
 
 #secondPlace {
-	width: 139px;
-	height: 139px;
+	width: 110px;
+	height: 110px;
 	position: absolute;
-	top: 400px;
-	left: 470px;
+	top: 415px;
+	left: 500px;
 }
 
 #firstPlace {
 	width: 139px;
 	height: 139px;
 	position: absolute;
-	top: 355px;
+	top: 385px;
 	left: 620px;
 }
 
 #thirdPlace {
-	width: 139px;
-	height: 139px;
+	width: 98px;
+	height: 98px;
 	position: absolute;
-	top: 420px;
+	top: 440px;
 	left: 770px;
 }
 
@@ -513,22 +516,22 @@ input:checked + .slider:before {
 	width: 50px;
 	height: : 50px;
 	position:absolute;
-	top: 430px;
+	top: 460px;
 	left: 700px;
 }
 
 #secondMedal {
-	width: 50px;
-	height: : 50px;
+	width: 45px;
+	height: 45px;
 	position:absolute;
-	top: 475px;
-	left: 551px;
+	top: 485px;
+	left: 567px;
 }
 
 #thirdMedal {
-	width: 50px;
-	height: : 50px;
+	width: 40px;
+	height: : 40px;
 	position:absolute;
-	top: 495px;
-	left: 850px;
+	top: 500px;
+	left: 830px;
 }

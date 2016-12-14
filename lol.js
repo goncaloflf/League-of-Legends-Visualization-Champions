@@ -31,9 +31,9 @@ d3.json("championstotal.json", function(data){
   orderBarChart();
 });
 
-d3.json("champions.json", function(data){
+/*d3.json("champions.json", function(data){
   datasetDetailed = data.data;
-});
+});*/
 
 function sanityToggles(){
   displayTop = document.getElementById("topCheckBox").checked;
@@ -628,6 +628,9 @@ function barchart() {
         })
       .transition().duration(500)
       .attr("y", function(d,i) {return 6 + i*21});
+
+      var barLen = $("#barChart").find("rect").length * 21;
+      svg.attr("height", barLen);
 }
 
 function formatTooltip(d) { 
@@ -702,10 +705,20 @@ function updateHallFame(){
   var first = rectList[0];
   var second = rectList[1];
   var third = rectList[2];
-  
-  $("#medalone").attr("src","images/firstplace.png");
-  $("#medaltwo").attr("src","images/secondplace.png");
-  $("#medalthree").attr("src","images/thirdplace.png");
+
+  if((!barChartAsc && barChartOrder != "Deaths") || (barChartAsc && barChartOrder == "Deaths")){
+    $("#hallFame").html("Hall of Fame");
+
+    $("#medalone").attr("src","images/firstplace.png");
+    $("#medaltwo").attr("src","images/secondplace.png");
+    $("#medalthree").attr("src","images/thirdplace.png");
+  } else {
+    $("#hallFame").html("Hall of Infame");
+
+    $("#medalone").attr("src","medals/skull.png");
+    $("#medaltwo").attr("src","medals/skull.png");
+    $("#medalthree").attr("src","medals/skull.png");
+  }
 
 
   for(j = 0; j < rectList.length; j++){
@@ -717,6 +730,8 @@ function updateHallFame(){
       third = rectList[j];
     }
   }
+
+  $("#hallDet").html("<u><b>" + barChartOrder + "</b></u>");
 
   $("#firstImage").attr("src","champions/" + first.getAttribute("text") + "_Square_0.png");
   $("#secondImage").attr("src","champions/" + second.getAttribute("text") + "_Square_0.png");
