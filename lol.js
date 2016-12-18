@@ -5,6 +5,7 @@ var adc = ["Ashe","Caitlyn","Corki","Draven","Ezreal","Jhin","Jinx","Kalista","K
 var sup = ["Alistar","Bard","Blitzcrank","Braum","Janna","Karma","Leona","Lulu","Morgana","Nami","Nautilus","Sona","Soraka","Tahm Kench","Taric","Thresh","Zilean","Zyra"]
 var currentChamp = "";
 var dataset;
+var detData;
 var barChartOrder = "Win Rate";
 var barChartAsc = false;
 var displayTop;
@@ -12,6 +13,8 @@ var displayMid;
 var displayAdc;
 var displaySup;
 var displayJun;
+
+var firstLane = "SUPPORT";
 
 const MAX_DEALT = 29000.321167883;
 const MAX_WARDS = 27.114444278;
@@ -22,6 +25,15 @@ const MAX_DEATH = 7.018248175;
 const MAX_ASSIST = 13.951847134;
 const MAX_WINRATE = 0.567102138;
 
+const MIN_DEALT = 4170.750364396;
+const MIN_WARDS = 8.203050524;
+const MIN_FARM = 13.684585987;
+const MIN_GOLD = 7616.418179755;
+const MIN_KILLS = 0.634531326;
+const MIN_DEATH = 3.728403459;
+const MIN_ASSIST = 4.074815595;
+const MIN_WINRATE = 0.300000000;
+
 var colorscale = d3.scaleOrdinal(d3.schemeSet1);
 var w = 180, h = 180;
 
@@ -31,9 +43,9 @@ d3.json("championstotal.json", function(data){
   orderBarChart();
 });
 
-/*d3.json("champions.json", function(data){
-  datasetDetailed = data.data;
-});*/
+d3.json("champions.json", function(data){ 
+  detData = data.data;
+});
 
 function sanityToggles(){
   displayTop = document.getElementById("topCheckBox").checked;
@@ -148,7 +160,13 @@ function highlightClickList(element) {
 	element.className = ("selected");
   document.getElementById("titleTile2").innerHTML = champion;
 
-  RadarChart.draw("#starplot");
+  disableButtons();
+
+  $("#compareTitle").html(currentChamp); 
+
+  firstLane = "Overall";
+  RadarChart.draw("#starplot",false);
+  RadarChart.draw("#starplotCompare",true);
 }
 
 function moveCircles(){
@@ -195,6 +213,8 @@ function clearChampList() {
 	}
 }
 
+
+
 //------------------------- SCREEN 2 -----------------------------------
 function formatMe(d){
   var toReturn = 0;
@@ -232,15 +252,27 @@ function treatWinRate(wr){
 }
 
 var RadarChart = {
-  draw: function(id){
+  draw: function(id,cmp){
 
     var champObject;
 
-    for(i = 0; i < dataset.length; i++){
-      if(dataset[i].ChampionName == currentChamp){
-        champObject = dataset[i];
+    if(!cmp || firstLane == "Overall"){
+      for(i = 0; i < dataset.length; i++){
+        if(dataset[i].ChampionName == currentChamp){
+          champObject = dataset[i];
+        }
+      }
+    } else if(cmp) {
+      for(j = 0; j < detData.length; j++){
+        if(detData[j].ChampionName == currentChamp){
+          if(detData[j].Lane.toLowerCase() == firstLane.toLowerCase()){
+            champObject = detData[j];
+        } else if(detData[j].Lane = "BOTTOM" && detData[j].Role.toLowerCase() == firstLane.toLowerCase()){
+            champObject = detData[j];
+        }
       }
     }
+  }
 
     var d = [
           [
@@ -254,6 +286,8 @@ var RadarChart = {
             {axis:"Win Rate",value: treatWinRate(parseFloat(champObject.WinGame.replace(',','.'))) /*/ MAX_WINRATE*/}
           ]
         ];
+
+
 
   var cfg = {
      radius: 5,
@@ -393,7 +427,13 @@ var RadarChart = {
       g.selectAll(".nodes")
         .data(y).enter()
         .append("svg:circle")
-        .attr("class", "radar-chart-serie"+series)
+        .attr("class", function(d){
+          if($(this).parent().parent().parent().attr("id") == "starplotCompare"){
+            return "radar-chart-serie"+series + " spCompare";
+          } else if($(this).parent().parent().parent().attr("id") == "starplot"){
+            return "radar-chart-serie"+series + " spNorm";
+          }
+        })
         .attr('r', cfg.radius)
         .attr("alt", function(j){return Math.max(j.value, 0)})
         .attr("cx", function(j, i){
@@ -409,6 +449,18 @@ var RadarChart = {
         .attr("data-id", function(j){return j.axis})
         .style("fill", cfg.color(series)).style("fill-opacity", .9)
         .on('mouseover', function (d,j){
+
+                    //HERE: onhover bug with the 2 starplots
+
+                    /*if($(this).attr("class").includes("spCompare")){
+                      newX =  parseFloat(d3.select(this).attr('cx')) - 10;
+                    } else if($(this).attr("class").includes("spNorm")){
+                      newX =  parseFloat(d3.select(this).attr('cx')) - 300;
+                    } else{
+                      console.log("Something went wrong!");
+                      newX =  parseFloat(d3.select(this).attr('cx')) - 10;
+                    }*/
+                    
                     newX =  parseFloat(d3.select(this).attr('cx')) - 10;
                     newY =  parseFloat(d3.select(this).attr('cy')) - 5;
 
@@ -455,7 +507,7 @@ var RadarChart = {
 
 
 
-//------------------------- SCREEN 4 -----------------------------------
+//------------------------- SCREENS 4 & 5 -----------------------------------
 
 function changeBarChart(element) {
   var tmpColor;
@@ -733,7 +785,7 @@ function updateHallFame(){
 
   $("#hallDet").html("<u><b>" + barChartOrder + "</b></u>");
 
-  $("#firstImage").attr("src","champions/" + first.getAttribute("text") + "_Square_0.png");
+  $("#firstImage").attr("src","champions/" + first.getAttribute("text") + "_Square_0.png")  ;
   $("#secondImage").attr("src","champions/" + second.getAttribute("text") + "_Square_0.png");
   $("#thirdImage").attr("src","champions/" + third.getAttribute("text") + "_Square_0.png");
 
@@ -741,3 +793,65 @@ function updateHallFame(){
   $("#secondLegend").html(second.getAttribute("text"));
   $("#thirdLegend").html(third.getAttribute("text"));
 }
+
+// ------------------------------------------- SCREEN 3 ---------------------------------------------------------
+
+function seeChampionLanes(champname){
+  var laneList = [];
+  for(i = 0; i < detData.length; i++){
+    if(detData[i].ChampionName == champname){
+      if(detData[i].Lane == "BOTTOM"){
+        laneList.push(detData[i].Role);
+      } else {
+        laneList.push(detData[i].Lane);
+      }
+    }
+  }
+  return laneList;
+}
+
+function changePrimeLane(btn){
+
+  firstLane = btn.innerHTML;
+
+  $("#starplotCompare").empty();
+
+
+  d3.json("champions.json", function(data){ 
+    detData = data.data;
+  });
+  
+  RadarChart.draw("#starplotCompare",true);
+  return 0;
+}
+
+
+function disableButtons(){
+  var auxList = seeChampionLanes(currentChamp);
+
+  $("#AllLaneButton").attr("disabled",false);
+  $("#TopLaneButton").attr("disabled",false);
+  $("#JunLaneButton").attr("disabled",false);
+  $("#MidLaneButton").attr("disabled",false);
+  $("#AdcLaneButton").attr("disabled",false);
+  $("#SupLaneButton").attr("disabled",false);
+
+  if(auxList.indexOf("TOP") < 0){
+    $("#TopLaneButton").attr("disabled",true);
+  }
+  if(auxList.indexOf("JUNGLE") < 0){
+    $("#JunLaneButton").attr("disabled",true);
+  }
+  if(auxList.indexOf("MID") < 0){
+    $("#MidLaneButton").attr("disabled",true);
+  }
+  if(auxList.indexOf("ADC") < 0){
+    $("#AdcLaneButton").attr("disabled",true);
+  }
+  if(auxList.indexOf("SUPPORT") < 0){
+    $("#SupLaneButton").attr("disabled",true);
+  } 
+}
+
+// ------------------------------------------- SCREEN 6 -------------------------------------------------------
+

@@ -319,6 +319,14 @@ li a:hover {
 	left: 530px;
 }
 
+#starplotCompare {
+	width: 180px;
+	height: 180px;
+	position: absolute;
+	top: 88px;
+	left: 915px;
+}
+
 .radar-chart-serie0, .radar-chart-serie1{
 	cursor: pointer;
 }
@@ -534,4 +542,31 @@ input:checked + .slider:before {
 	position:absolute;
 	top: 500px;
 	left: 830px;
+}
+
+#compareTitle {
+	margin: 10px;
+	float: left;
+	font-weight: bolder;
+	font-size: 25px;
+	color: red;
+}
+
+#wrapper {
+	float:left;
+}
+
+#chooseLane {
+	height: 25px;
+	width: 300px;
+	position: absolute;
+	top: 55px;
+	left: 930px;
+}
+
+.laneButton {
+	display: inline-block;
+	height: 100%;
+	width: 50px;
+	float: left;
 }

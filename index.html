@@ -87,7 +87,7 @@
                   <li><a onclick="highlightClickList(this)" href="#">Kled</a></li>
                   <li><a onclick="highlightClickList(this)" href="#" style="background-image: url('champions/Kog\'Maw_Square_0.png');">Kog'Maw</a></li>
                   <li><a onclick="highlightClickList(this)" href="#">LeBlanc</a></li>
-                  <li><a onclick="highlightClickList(this)" href="#" style="background-image: url('champions/Lee Sin_Square_0.png');">Lee Sin</a></li>
+                  <li><a onclick="highl ightClickList(this)" href="#" style="background-image: url('champions/Lee Sin_Square_0.png');">Lee Sin</a></li>
                   <li><a onclick="highlightClickList(this)" href="#">Leona</a></li>
                   <li><a onclick="highlightClickList(this)" href="#">Lissandra</a></li>
                   <li><a onclick="highlightClickList(this)" href="#">Lucian</a></li>
@@ -181,6 +181,19 @@
 
           <td>
             <div class="container">
+              <div id="compareTitle">Ola</div>
+
+              <div id="chooseLane">
+                <button id="AllLaneButton"class="laneButton" onclick="changePrimeLane(this)">Overall</button>
+                <button id="TopLaneButton"class="laneButton" onclick="changePrimeLane(this)">TOP</button>
+                <button id="JunLaneButton"class="laneButton" onclick="changePrimeLane(this)">JUNGLE</button>
+                <button id="MidLaneButton"class="laneButton" onclick="changePrimeLane(this)">MID</button>
+                <button id="AdcLaneButton"class="laneButton" onclick="changePrimeLane(this)">ADC</button>
+                <button id="SupLaneButton"class="laneButton" onclick="changePrimeLane(this)">SUPPORT</button>
+              </div>
+
+              <div id="starplotCompare">
+              </div>
             </div>
           </td>
         </tr>
