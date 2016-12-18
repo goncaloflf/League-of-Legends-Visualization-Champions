@@ -41,6 +41,9 @@ d3.json("championstotal.json", function(data){
 	dataset = data.data;
   sanityToggles();
   orderBarChart();
+  $("#dsc").attr("disabled",true);
+  $("#asc").attr("disabled",false);
+  $("#cmpDiv").hide();
 });
 
 d3.json("champions.json", function(data){ 
@@ -105,6 +108,8 @@ function clickChamps() {
 		document.getElementById(child[i].id).className = "";
 		document.getElementById(child[i].id).style.visibility = "visible";
 	}
+
+  $("#cmpDiv").hide();
 }
 
 function highlightClickList(element) {
@@ -161,6 +166,9 @@ function highlightClickList(element) {
   document.getElementById("titleTile2").innerHTML = champion;
 
   disableButtons();
+
+  $("#cmpDiv").show();
+
 
   $("#compareTitle").html(currentChamp); 
 
@@ -712,6 +720,10 @@ function changeOrder(element) {
   $("#barChart").empty();
   barchart();
   updateHallFame();
+
+  $(element).attr("disabled",true);
+  $(element).siblings().attr("disabled",false);
+
 
 }
 
