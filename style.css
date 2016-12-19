@@ -629,3 +629,10 @@ input:checked + .slider:before {
 	color: #377eb8;
 	font-weight: bolder;
 }
+
+#scatterplot {
+	width: 452px;
+	height: 280px;
+	position: absolute;
+	top: 347px;
+}

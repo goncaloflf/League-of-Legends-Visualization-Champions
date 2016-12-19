@@ -53,6 +53,8 @@ d3.json("champions.json", function(data){
   detData = data.data;
 });
 
+drawScatterplot();
+
 function sanityToggles(){
   displayTop = document.getElementById("topCheckBox").checked;
   displayMid = document.getElementById("midCheckBox").checked;
@@ -291,7 +293,10 @@ var RadarChart = {
   } catch(err){
       firstLane = "Overall";
       secondChampLane = "Overall";
+      $("#bluLeg").html(secondChamp);
+      $("#redLeg").html(currentChamp);
       RadarChart.draw("#starplotCompare",true);
+      return;
   }
     var d = [
           [
@@ -306,40 +311,48 @@ var RadarChart = {
           ]
         ];
 
-  if(secondChamp != "" && cmp){
-    var secondChampObject;
-    if(secondChampLane == "Overall"){
-      for(i = 0; i < dataset.length; i++){
-        if(dataset[i].ChampionName == secondChamp){
-          secondChampObject = dataset[i];
+  try{
+    if(secondChamp != "" && cmp){
+      var secondChampObject;
+      if(secondChampLane == "Overall"){
+        for(i = 0; i < dataset.length; i++){
+          if(dataset[i].ChampionName == secondChamp){
+            secondChampObject = dataset[i];
+          }
+        }
+      } else {
+        for(j = 0; j < detData.length; j++){
+          if(detData[j].ChampionName == secondChamp){
+            if(detData[j].Lane.toLowerCase() == secondChampLane.toLowerCase()){
+              secondChampObject = detData[j];
+          } else if(detData[j].Lane = "BOTTOM" && detData[j].Role.toLowerCase() == secondChampLane.toLowerCase()){
+              secondChampObject = detData[j];
+          } 
         }
       }
-    } else {
-      for(j = 0; j < detData.length; j++){
-        if(detData[j].ChampionName == secondChamp){
-          if(detData[j].Lane.toLowerCase() == secondChampLane.toLowerCase()){
-            secondChampObject = detData[j];
-        } else if(detData[j].Lane = "BOTTOM" && detData[j].Role.toLowerCase() == secondChampLane.toLowerCase()){
-            secondChampObject = detData[j];
-        } 
-      }
     }
+
+      var tmpD = [
+                {axis:"Assists",value: parseFloat(secondChampObject.AssistGame.replace(',','.')) / MAX_ASSIST},
+                {axis:"Wards",value: parseFloat(secondChampObject.WardsPlacedGame.replace(',','.')) / MAX_WARDS},
+                {axis:"Minions",value: parseFloat(secondChampObject.MinionGame.replace(',','.')) / MAX_FARM},
+                {axis:"Gold Earned",value: parseFloat(secondChampObject.GoldSpentGame.replace(',','.')) / MAX_GOLD},
+                {axis:"Kills",value: parseFloat(secondChampObject.KillGame.replace(',','.')) / MAX_KILLS},
+                {axis:"Deaths",value: parseFloat(secondChampObject.DeathGame.replace(',','.')) / MAX_DEATH},
+                {axis:"Damage Dealt",value: parseFloat(secondChampObject.DamageChampionGame.replace(',','.')) / MAX_DEALT},
+                {axis:"Win Rate",value: treatWinRate(parseFloat(secondChampObject.WinGame.replace(',','.'))) /*/ MAX_WINRATE*/}
+              ];
+
+      d.push(tmpD);
+    }
+  } catch (err) {
+      firstLane = "Overall";
+      secondChampLane = "Overall";
+      $("#bluLeg").html(secondChamp);
+      $("#redLeg").html(currentChamp);
+      RadarChart.draw("#starplotCompare",true);
+      return;
   }
-
-    var tmpD = [
-              {axis:"Assists",value: parseFloat(secondChampObject.AssistGame.replace(',','.')) / MAX_ASSIST},
-              {axis:"Wards",value: parseFloat(secondChampObject.WardsPlacedGame.replace(',','.')) / MAX_WARDS},
-              {axis:"Minions",value: parseFloat(secondChampObject.MinionGame.replace(',','.')) / MAX_FARM},
-              {axis:"Gold Earned",value: parseFloat(secondChampObject.GoldSpentGame.replace(',','.')) / MAX_GOLD},
-              {axis:"Kills",value: parseFloat(secondChampObject.KillGame.replace(',','.')) / MAX_KILLS},
-              {axis:"Deaths",value: parseFloat(secondChampObject.DeathGame.replace(',','.')) / MAX_DEATH},
-              {axis:"Damage Dealt",value: parseFloat(secondChampObject.DamageChampionGame.replace(',','.')) / MAX_DEALT},
-              {axis:"Win Rate",value: treatWinRate(parseFloat(secondChampObject.WinGame.replace(',','.'))) /*/ MAX_WINRATE*/}
-            ];
-
-    d.push(tmpD);
-  }
-
 
 
   var cfg = {
@@ -971,3 +984,57 @@ function changeSecLane(element) {
 
 // ------------------------------------------- SCREEN 6 -------------------------------------------------------
 
+function drawScatterplot() {
+  var data = [[5,3], [10,17], [15,4], [2,8]];
+   
+    var margin = {top: 20, right: 15, bottom: 60, left: 60}
+      , width = 960 - margin.left - margin.right
+      , height = 500 - margin.top - margin.bottom;
+    
+    var x = d3.scaleLinear()
+              .domain([0, d3.max(data, function(d) { return d[0]; })])
+              .range([ 0, width ]);
+    
+    var y = d3.scaleLinear()
+            .domain([0, d3.max(data, function(d) { return d[1]; })])
+            .range([ height, 0 ]);
+ 
+    var chart = d3.select('#scatterplot')
+  .append('svg:svg')
+  .attr('width', width + margin.right + margin.left)
+  .attr('height', height + margin.top + margin.bottom)
+  .attr('class', 'chart')
+
+    var main = chart.append('g')
+  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+  .attr('width', width)
+  .attr('height', height)
+  .attr('class', 'main')   
+        
+    // draw the x axis
+    var xAxis = d3.axisBottom()
+  .scale(x);
+
+    main.append('g')
+  .attr('transform', 'translate(0,' + height + ')')
+  .attr('class', 'main axis date')
+  .call(xAxis);
+
+    // draw the y axis
+    var yAxis = d3.axisLeft()
+  .scale(y);
+
+    main.append('g')
+  .attr('transform', 'translate(0,0)')
+  .attr('class', 'main axis date')
+  .call(yAxis);
+
+    var g = main.append("svg:g"); 
+    
+    g.selectAll("scatter-dots")
+      .data(data)
+      .enter().append("svg:circle")
+          .attr("cx", function (d,i) { return x(d[0]); } )
+          .attr("cy", function (d) { return y(d[1]); } )
+          .attr("r", 8);
+}
