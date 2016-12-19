@@ -10,7 +10,7 @@ table{
     width: 1356px;
     height: 633px;
     padding: 0px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     table-layout: fixed;
     text-align: center;
 }
@@ -18,7 +18,7 @@ table{
 td{
     width: 452px;
     min-height: 50%;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     table-layout: fixed;
 }
 

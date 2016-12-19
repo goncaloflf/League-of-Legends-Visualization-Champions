@@ -55,7 +55,11 @@ d3.json("championstotal.json", function(data){
   scatterY = $("#selY").find(":selected").text();
 
   $("#scatterplot").empty();
+  $("#bluLeg").empty();
+  $("#redLeg").empty();
   drawScatterplot();
+
+  $(".secChampLaneBtn").attr("disabled",true);
 
 });
 
@@ -188,9 +192,12 @@ function highlightClickList(element) {
 
   firstLane = "Overall";
   RadarChart.draw("#starplot",false);
-  RadarChart.draw("#starplotCompare",true);
+  secondChamp = "";
+  $(".secChampLaneBtn").attr("disabled",true);
 
+  RadarChart.draw("#starplotCompare",true);
   $("#redLeg").html(currentChamp);
+  $("#bluLeg").html("");
 
 }
 
@@ -301,8 +308,8 @@ var RadarChart = {
     }
   } catch(err){
       firstLane = "Overall";
-      secondChampLane = "Overall";
-      $("#bluLeg").html(secondChamp);
+      secondChampLane = secondChampLane;
+      $("#bluLeg").html(secondChamp + " (" + secondChampLane + ")");
       $("#redLeg").html(currentChamp);
       RadarChart.draw("#starplotCompare",true);
       return;
@@ -356,8 +363,8 @@ var RadarChart = {
     }
   } catch (err) {
       firstLane = "Overall";
-      secondChampLane = "Overall";
-      $("#bluLeg").html(secondChamp);
+      secondChampLane = secondChampLane;
+      $("#bluLeg").html(secondChamp + " (" + secondChampLane + ")");
       $("#redLeg").html(currentChamp);
       RadarChart.draw("#starplotCompare",true);
       return;
@@ -370,7 +377,7 @@ var RadarChart = {
      h: 180,
      factor: 1,
      factorLegend: .85,
-     levels: 3,
+     levels: 0,
      maxValue: 0,
      radians: 2 * Math.PI,
      opacityArea: 0.5,
@@ -814,6 +821,7 @@ function orderBarChart() {
   $("#barChart").empty();
   barchart();
   updateHallFame();
+
   redrawScatterplot();
 }
 
@@ -1003,7 +1011,7 @@ function calcXscale(padding) {
      case "Deaths":
        return d3.scaleLinear().domain([3,MAX_DEATH]).range([padding + 30,452-padding]);
      case "Assists":
-       return d3.scaleLinear().domain([3,MAX_ASSIST]).range([padding + 30,452-padding]);
+       return d3.scaleLinear().domain([0,MAX_ASSIST]).range([padding + 30,452-padding]);
      case "Minions":
        return d3.scaleLinear().domain([0,MAX_FARM]).range([padding + 30,452-padding]);
      case "Gold Earned":
@@ -1024,7 +1032,7 @@ function calcYscale(padding) {
      case "Deaths":
        return d3.scaleLinear().domain([3,MAX_DEATH]).range([280-padding,padding]);
      case "Assists":
-       return d3.scaleLinear().domain([3,MAX_ASSIST]).range([280-padding,padding]);
+       return d3.scaleLinear().domain([0,MAX_ASSIST]).range([280-padding,padding]);
      case "Minions":
        return d3.scaleLinear().domain([0,MAX_FARM]).range([280-padding,padding]);
      case "Gold Earned":
@@ -1061,14 +1069,25 @@ function drawScatterplot() {
   var yScale = calcYscale(padding);
 
   var yaxis = d3.axisLeft().scale(yScale);
+  
+  if(scatterY == "Damage Dealt"){
+    yaxis.tickFormat(d3.format(".2s"));
+  }
+
   svg.append("g").attr("transform","translate(45,-0.7)").call(yaxis);  
 
   var xaxis = d3.axisBottom().scale(xScale);
+  
+  if(scatterX == "Damage Dealt"){
+    xaxis.tickFormat(d3.format(".2s"));
+  }
+
   svg.append("g").attr("transform","translate(0,264)").call(xaxis);
 
   var div = d3.select("body").append("div")
               .attr("class","tooltipSca")
               .style("opacity",0);
+
 
 
   svg.selectAll("circle")
@@ -1161,12 +1180,14 @@ function drawScatterplot() {
           .attr("r",5);
 
       svg.append("text")
-          .attr("transform","translate(350,260)")
+          .attr("transform","translate(370,260)")
+          .style("font-size",12)
           .text(scatterX);
 
       svg.append("text")
-          .attr("transform","translate(0,15)")
-          .text(scatterY  );
+          .attr("transform","translate(0,9)")
+          .style("font-size",12)
+          .text(scatterY);
 }
 
 function formatTooltipSca(d) {
