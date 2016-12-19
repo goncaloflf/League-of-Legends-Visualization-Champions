@@ -997,7 +997,7 @@ function changeSecLane(element) {
 function calcXscale(padding) {
   switch(scatterX){
      case "Win Rate":
-       return d3.scaleLinear().domain([0.28,MAX_WINRATE]).range([padding + 30,452-padding]);
+       return d3.scaleLinear().domain([0.4,MAX_WINRATE]).range([padding + 30,452-padding]);
      case "Damage Dealt":
        return d3.scaleLinear().domain([2000,MAX_DEALT]).range([padding + 30,452-padding]);
      case "Deaths":
@@ -1018,7 +1018,7 @@ function calcXscale(padding) {
 function calcYscale(padding) {
   switch(scatterY){
      case "Win Rate":
-       return d3.scaleLinear().domain([0.28,MAX_WINRATE]).range([280-padding,padding]);
+       return d3.scaleLinear().domain([0.4,MAX_WINRATE]).range([280-padding,padding]);
      case "Damage Dealt":
        return d3.scaleLinear().domain([2000,MAX_DEALT]).range([280-padding,padding]);
      case "Deaths":
@@ -1068,7 +1068,7 @@ function drawScatterplot() {
 
   var div = d3.select("body").append("div")
               .attr("class","tooltipSca")
-              .style("opacity",1);
+              .style("opacity",0);
 
 
   svg.selectAll("circle")
@@ -1159,6 +1159,14 @@ function drawScatterplot() {
 
       svg.selectAll("circle").transition().duration(500)
           .attr("r",5);
+
+      svg.append("text")
+          .attr("transform","translate(350,260)")
+          .text(scatterX);
+
+      svg.append("text")
+          .attr("transform","translate(0,15)")
+          .text(scatterY  );
 }
 
 function formatTooltipSca(d) {
