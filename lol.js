@@ -634,7 +634,8 @@ function barchart() {
                 .scale(xScale.domain([0,100]));
 
   var div = d3.select("body").append("div")
-              .attr("class","tooltip")
+              .attr("class","tooltipSca")
+              .style("height",35)
               .style("opacity",0);
 
 
@@ -696,7 +697,10 @@ function barchart() {
         div.transition().duration(100).style("opacity",1.0);
         div.html(formatTooltip(d))
           .style("left", (d3.event.pageX) + "px")   
-          .style("top", (d3.event.pageY - 30) + "px");})
+          .style("top", (d3.event.pageY - 30) + "px")
+          .style("color","white")
+          .style("background-color",tmpColor);
+      })
       .on("mouseout",function(){
         //d3.select(this).attr("height",20);
         d3.select(this).attr("fill",tmpColor);
@@ -768,24 +772,36 @@ function barchart() {
 }
 
 function formatTooltip(d) { 
+        var a = "<strong>" + d.ChampionName + "</strong><br>";
+
         switch(barChartOrder){
           case "Win Rate":
-            return "" + d.ChampionName + " - " + (100*(parseFloat(d.WinGame.replace(',','.')))).toFixed(2) + "%";
+            a +=  "Win Rate: " + (100*(parseFloat(d.WinGame.replace(',','.')))).toFixed(2) + "%";
+            break;
           case "Damage Dealt":
-            return "" + d.ChampionName + " - " + (parseFloat(d.DamageChampionGame.replace(',','.'))).toFixed(2);          
+            a += "Damage Dealt: " +  (parseFloat(d.DamageChampionGame.replace(',','.'))).toFixed(2);
+            break;          
           case "Deaths":
-            return "" + d.ChampionName + " - " + (parseFloat(d.DeathGame.replace(',','.'))).toFixed(2);          
+            a += "Deaths: " + (parseFloat(d.DeathGame.replace(',','.'))).toFixed(2);          
+            break;
           case "Assists":
-            return "" + d.ChampionName + " - " + (parseFloat(d.AssistGame.replace(',','.'))).toFixed(2);
+            a += "Assists: " + (parseFloat(d.AssistGame.replace(',','.'))).toFixed(2);
+            break;
           case "Minions":
-            return "" + d.ChampionName + " - " + (parseFloat(d.MinionGame.replace(',','.'))).toFixed(2);
+            a += "Minions: " + (parseFloat(d.MinionGame.replace(',','.'))).toFixed(2);
+            break;
           case "Gold Earned":
-            return "" + d.ChampionName + " - " + (parseFloat(d.GoldSpentGame.replace(',','.'))).toFixed(2);
+            a += "Gold Earned: " + (parseFloat(d.GoldSpentGame.replace(',','.'))).toFixed(2);
+            break;
           case "Kills":
-            return "" + d.ChampionName + " - " + (parseFloat(d.KillGame.replace(',','.'))).toFixed(2);
+            a += "Kills: " + (parseFloat(d.KillGame.replace(',','.'))).toFixed(2);
+            break;
           case "Wards":
-            return "" + d.ChampionName + " - " + (parseFloat(d.WardsPlacedGame.replace(',','.'))).toFixed(2);
+            a += "Wards: " + (parseFloat(d.WardsPlacedGame.replace(',','.'))).toFixed(2);
+            break;
       }
+
+      return a;
 }
 
 function changeOrder(element) {
