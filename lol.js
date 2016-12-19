@@ -15,6 +15,9 @@ var displaySup;
 var displayJun;
 
 var firstLane = "SUPPORT";
+var secondChamp = "";
+var secondChampLane = "Overall";
+
 
 const MAX_DEALT = 29000.321167883;
 const MAX_WARDS = 27.114444278;
@@ -175,6 +178,9 @@ function highlightClickList(element) {
   firstLane = "Overall";
   RadarChart.draw("#starplot",false);
   RadarChart.draw("#starplotCompare",true);
+
+  $("#redLeg").html(currentChamp);
+
 }
 
 function moveCircles(){
@@ -294,6 +300,40 @@ var RadarChart = {
             {axis:"Win Rate",value: treatWinRate(parseFloat(champObject.WinGame.replace(',','.'))) /*/ MAX_WINRATE*/}
           ]
         ];
+
+  if(secondChamp != "" && cmp){
+    var secondChampObject;
+    if(secondChampLane == "Overall"){
+      for(i = 0; i < dataset.length; i++){
+        if(dataset[i].ChampionName == secondChamp){
+          secondChampObject = dataset[i];
+        }
+      }
+    } else {
+      for(j = 0; j < detData.length; j++){
+        if(detData[j].ChampionName == secondChamp){
+          if(detData[j].Lane.toLowerCase() == secondChampLane.toLowerCase()){
+            secondChampObject = detData[j];
+        } else if(detData[j].Lane = "BOTTOM" && detData[j].Role.toLowerCase() == secondChampLane.toLowerCase()){
+            secondChampObject = detData[j];
+        } 
+      }
+    }
+  }
+
+    var tmpD = [
+              {axis:"Assists",value: parseFloat(secondChampObject.AssistGame.replace(',','.')) / MAX_ASSIST},
+              {axis:"Wards",value: parseFloat(secondChampObject.WardsPlacedGame.replace(',','.')) / MAX_WARDS},
+              {axis:"Minions",value: parseFloat(secondChampObject.MinionGame.replace(',','.')) / MAX_FARM},
+              {axis:"Gold Earned",value: parseFloat(secondChampObject.GoldSpentGame.replace(',','.')) / MAX_GOLD},
+              {axis:"Kills",value: parseFloat(secondChampObject.KillGame.replace(',','.')) / MAX_KILLS},
+              {axis:"Deaths",value: parseFloat(secondChampObject.DeathGame.replace(',','.')) / MAX_DEATH},
+              {axis:"Damage Dealt",value: parseFloat(secondChampObject.DamageChampionGame.replace(',','.')) / MAX_DEALT},
+              {axis:"Win Rate",value: treatWinRate(parseFloat(secondChampObject.WinGame.replace(',','.'))) /*/ MAX_WINRATE*/}
+            ];
+
+    d.push(tmpD);
+  }
 
 
 
@@ -834,7 +874,8 @@ function changePrimeLane(btn){
   });
   
   RadarChart.draw("#starplotCompare",true);
-  return 0;
+
+  $("#redLeg").html(currentChamp + " (" + firstLane + ")");
 }
 
 
@@ -864,6 +905,61 @@ function disableButtons(){
     $("#SupLaneButton").attr("disabled",true);
   } 
 }
+
+function disableSecondButtons() {
+  var auxList = seeChampionLanes(secondChamp);
+
+  $("#secondLaneOverall").attr("disabled",false);
+  $("#secondLaneTop").attr("disabled",false);
+  $("#secondLaneMid").attr("disabled",false);
+  $("#secondLaneJun").attr("disabled",false);
+  $("#secondLaneAdc").attr("disabled",false);
+  $("#secondLaneSup").attr("disabled",false);
+
+  if(auxList.indexOf("TOP") < 0){
+    $("#secondLaneTop").attr("disabled",true);
+  }
+  if(auxList.indexOf("JUNGLE") < 0){
+    $("#secondLaneJun").attr("disabled",true);
+  }
+  if(auxList.indexOf("MID") < 0){
+    $("#secondLaneMid").attr("disabled",true);
+  }
+  if(auxList.indexOf("ADC") < 0){
+    $("#secondLaneAdc").attr("disabled",true);
+  }
+  if(auxList.indexOf("SUPPORT") < 0){
+    $("#secondLaneSup").attr("disabled",true);
+  } 
+}
+
+function clickSecondChamp(element) {
+  $(element).parent().siblings().children().removeClass();
+  $(element).addClass("selected");
+
+  secondChampLane = "Overall";
+
+  secondChamp = element.innerHTML;
+
+  disableSecondButtons();
+  $("#starplotCompare").empty();
+  RadarChart.draw("#starplotCompare",true);
+  $("#bluLeg").html(secondChamp);
+}
+
+function changeSecLane(element) {
+  secondChampLane = element.innerHTML;
+
+  d3.json("champions.json", function(data){ 
+    detData = data.data;
+  });
+
+  $("#starplotCompare").empty();
+  RadarChart.draw("#starplotCompare",true);
+
+  $("#bluLeg").html(secondChamp + " (" + secondChampLane +")");
+}
+
 
 // ------------------------------------------- SCREEN 6 -------------------------------------------------------
 

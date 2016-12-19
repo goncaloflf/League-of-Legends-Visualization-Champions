@@ -570,3 +570,62 @@ input:checked + .slider:before {
 	width: 50px;
 	float: left;
 }
+
+#secondChamp {
+	font-weight: bolder;
+	font-size: 20px;
+	color: #377eb8;
+	float:right;
+	margin:5px;
+}
+
+#secondChampSel {
+	position: absolute;
+	top: 45px;
+	left: 1258px;
+	width: 110px;
+	height: 200px;
+}
+
+#championsListCmp {
+	width: 110px;
+	height: 170;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.secChampLaneBtn {
+	width:100%;
+	height:20px;
+}
+
+#secondChampLane {
+	position: absolute;
+	top: 220px;
+	left: 1257px;
+	width: 110px;
+	height: 120px;
+}
+
+.spLegend {
+	height: 40px;
+	width: 142px;
+	position: absolute;
+	top: 300px;
+	font-size: 13px;
+}
+
+.legend {
+	float:left;
+	margin-left: 4px;
+}
+
+#redLeg {
+	font-weight: bolder;
+	color:red;
+}
+
+#bluLeg {
+	color: #377eb8;
+	font-weight: bolder;
+}
