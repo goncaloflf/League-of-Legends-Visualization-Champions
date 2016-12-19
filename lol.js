@@ -917,20 +917,31 @@ function disableButtons(){
   $("#AdcLaneButton").attr("disabled",false);
   $("#SupLaneButton").attr("disabled",false);
 
+  $("#TopLaneButton").css("opacity","1");
+  $("#JunLaneButton").css("opacity","1");
+  $("#MidLaneButton").css("opacity","1");
+  $("#AdcLaneButton").css("opacity","1");
+  $("#SupLaneButton").css("opacity","1");
+
   if(auxList.indexOf("TOP") < 0){
     $("#TopLaneButton").attr("disabled",true);
+    $("#TopLaneButton").css("opacity","0.2");
   }
   if(auxList.indexOf("JUNGLE") < 0){
     $("#JunLaneButton").attr("disabled",true);
+    $("#JunLaneButton").css("opacity","0.2");
   }
   if(auxList.indexOf("MID") < 0){
     $("#MidLaneButton").attr("disabled",true);
+    $("#MidLaneButton").css("opacity","0.2");
   }
   if(auxList.indexOf("ADC") < 0){
     $("#AdcLaneButton").attr("disabled",true);
+    $("#AdcLaneButton").css("opacity","0.2");
   }
   if(auxList.indexOf("SUPPORT") < 0){
     $("#SupLaneButton").attr("disabled",true);
+    $("#SupLaneButton").css("opacity","0.2");
   } 
 }
 
@@ -944,20 +955,32 @@ function disableSecondButtons() {
   $("#secondLaneAdc").attr("disabled",false);
   $("#secondLaneSup").attr("disabled",false);
 
+  $("#secondLaneOverall").css("opacity","1");
+  $("#secondLaneTop").css("opacity","1");
+  $("#secondLaneMid").css("opacity","1");
+  $("#secondLaneJun").css("opacity","1");
+  $("#secondLaneAdc").css("opacity","1");
+  $("#secondLaneSup").css("opacity","1");
+
   if(auxList.indexOf("TOP") < 0){
     $("#secondLaneTop").attr("disabled",true);
+    $("#secondLaneTop").css("opacity","0.2");
   }
   if(auxList.indexOf("JUNGLE") < 0){
     $("#secondLaneJun").attr("disabled",true);
+    $("#secondLaneJun").css("opacity","0.2");
   }
   if(auxList.indexOf("MID") < 0){
     $("#secondLaneMid").attr("disabled",true);
+    $("#secondLaneMid").css("opacity","0.2");
   }
   if(auxList.indexOf("ADC") < 0){
     $("#secondLaneAdc").attr("disabled",true);
+    $("#secondLaneAdc").css("opacity","0.2");
   }
   if(auxList.indexOf("SUPPORT") < 0){
     $("#secondLaneSup").attr("disabled",true);
+    $("#secondLaneSup").css("opacity","0.2");
   } 
 }
 
