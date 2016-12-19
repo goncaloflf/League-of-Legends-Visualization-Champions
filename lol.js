@@ -270,24 +270,29 @@ var RadarChart = {
 
     var champObject;
 
-    if(!cmp || firstLane == "Overall"){
-      for(i = 0; i < dataset.length; i++){
-        if(dataset[i].ChampionName == currentChamp){
-          champObject = dataset[i];
+    try{
+      if(!cmp || firstLane == "Overall"){
+        for(i = 0; i < dataset.length; i++){
+          if(dataset[i].ChampionName == currentChamp){
+            champObject = dataset[i];
+          }
         }
-      }
-    } else if(cmp) {
-      for(j = 0; j < detData.length; j++){
-        if(detData[j].ChampionName == currentChamp){
-          if(detData[j].Lane.toLowerCase() == firstLane.toLowerCase()){
-            champObject = detData[j];
-        } else if(detData[j].Lane = "BOTTOM" && detData[j].Role.toLowerCase() == firstLane.toLowerCase()){
-            champObject = detData[j];
+      } else if(cmp) {
+        for(j = 0; j < detData.length; j++){
+          if(detData[j].ChampionName == currentChamp){
+            if(detData[j].Lane.toLowerCase() == firstLane.toLowerCase()){
+              champObject = detData[j];
+          } else if(detData[j].Lane = "BOTTOM" && detData[j].Role.toLowerCase() == firstLane.toLowerCase()){
+              champObject = detData[j];
+          }
         }
       }
     }
+  } catch(err){
+      firstLane = "Overall";
+      secondChampLane = "Overall";
+      RadarChart.draw("#starplotCompare",true);
   }
-
     var d = [
           [
             {axis:"Assists",value: parseFloat(champObject.AssistGame.replace(',','.')) / MAX_ASSIST},
@@ -934,10 +939,11 @@ function disableSecondButtons() {
 }
 
 function clickSecondChamp(element) {
+  secondChampLane = "Overall";
+
   $(element).parent().siblings().children().removeClass();
   $(element).addClass("selected");
 
-  secondChampLane = "Overall";
 
   secondChamp = element.innerHTML;
 
@@ -948,6 +954,8 @@ function clickSecondChamp(element) {
 }
 
 function changeSecLane(element) {
+  if(secondChampLane == element.innerHTML) { return 0;}
+
   secondChampLane = element.innerHTML;
 
   d3.json("champions.json", function(data){ 

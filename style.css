@@ -609,7 +609,7 @@ input:checked + .slider:before {
 
 .spLegend {
 	height: 40px;
-	width: 142px;
+	width: 160px;
 	position: absolute;
 	top: 300px;
 	font-size: 13px;
