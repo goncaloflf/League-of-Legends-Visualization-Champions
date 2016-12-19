@@ -983,7 +983,7 @@ function changeSecLane(element) {
 
 
 // ------------------------------------------- SCREEN 6 -------------------------------------------------------
-
+/*
 function drawScatterplot() {
   var data = [[5,3], [10,17], [15,4], [2,8]];
    
@@ -1037,4 +1037,4 @@ function drawScatterplot() {
           .attr("cx", function (d,i) { return x(d[0]); } )
           .attr("cy", function (d) { return y(d[1]); } )
           .attr("r", 8);
-}
+}*/
