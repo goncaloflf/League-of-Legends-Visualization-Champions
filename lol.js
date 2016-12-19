@@ -14,6 +14,9 @@ var displayAdc;
 var displaySup;
 var displayJun;
 
+var scatterX = "Kills";
+var scatterY = "Kills";
+
 var firstLane = "SUPPORT";
 var secondChamp = "";
 var secondChampLane = "Overall";
@@ -47,13 +50,19 @@ d3.json("championstotal.json", function(data){
   $("#dsc").attr("disabled",true);
   $("#asc").attr("disabled",false);
   $("#cmpDiv").hide();
+
+  scatterX = $("#selX").find(":selected").text();
+  scatterY = $("#selY").find(":selected").text();
+
+  $("#scatterplot").empty();
+  drawScatterplot();
+
 });
 
 d3.json("champions.json", function(data){ 
   detData = data.data;
 });
 
-drawScatterplot();
 
 function sanityToggles(){
   displayTop = document.getElementById("topCheckBox").checked;
@@ -805,6 +814,7 @@ function orderBarChart() {
   $("#barChart").empty();
   barchart();
   updateHallFame();
+  redrawScatterplot();
 }
 
 function updateHallFame(){
@@ -983,58 +993,232 @@ function changeSecLane(element) {
 
 
 // ------------------------------------------- SCREEN 6 -------------------------------------------------------
-/*
+
+function calcXscale(padding) {
+  switch(scatterX){
+     case "Win Rate":
+       return d3.scaleLinear().domain([0.28,MAX_WINRATE]).range([padding + 30,452-padding]);
+     case "Damage Dealt":
+       return d3.scaleLinear().domain([2000,MAX_DEALT]).range([padding + 30,452-padding]);
+     case "Deaths":
+       return d3.scaleLinear().domain([3,MAX_DEATH]).range([padding + 30,452-padding]);
+     case "Assists":
+       return d3.scaleLinear().domain([3,MAX_ASSIST]).range([padding + 30,452-padding]);
+     case "Minions":
+       return d3.scaleLinear().domain([0,MAX_FARM]).range([padding + 30,452-padding]);
+     case "Gold Earned":
+       return d3.scaleLinear().domain([7000,MAX_GOLD]).range([padding + 30,452-padding]);
+     case "Kills":
+       return d3.scaleLinear().domain([0,MAX_KILLS]).range([padding + 30,452-padding]);
+     case "Wards":
+       return d3.scaleLinear().domain([6,MAX_WARDS]).range([padding + 30,452-padding]);
+  }
+}
+
+function calcYscale(padding) {
+  switch(scatterY){
+     case "Win Rate":
+       return d3.scaleLinear().domain([0.28,MAX_WINRATE]).range([280-padding,padding]);
+     case "Damage Dealt":
+       return d3.scaleLinear().domain([2000,MAX_DEALT]).range([280-padding,padding]);
+     case "Deaths":
+       return d3.scaleLinear().domain([3,MAX_DEATH]).range([280-padding,padding]);
+     case "Assists":
+       return d3.scaleLinear().domain([3,MAX_ASSIST]).range([280-padding,padding]);
+     case "Minions":
+       return d3.scaleLinear().domain([0,MAX_FARM]).range([280-padding,padding]);
+     case "Gold Earned":
+       return d3.scaleLinear().domain([7000,MAX_GOLD]).range([280-padding,padding]);
+     case "Kills":
+       return d3.scaleLinear().domain([0,MAX_KILLS]).range([280-padding,padding]);
+     case "Wards":
+       return d3.scaleLinear().domain([6,MAX_WARDS]).range([280-padding,padding]);
+  }
+}
+
+function redrawScatterplot() {
+  scatterX = $("#selX").find(":selected").text();
+  scatterY = $("#selY").find(":selected").text();
+
+  $("#scatterplot").empty();
+
+  drawScatterplot();
+}
+
+
 function drawScatterplot() {
-  var data = [[5,3], [10,17], [15,4], [2,8]];
-   
-    var margin = {top: 20, right: 15, bottom: 60, left: 60}
-      , width = 960 - margin.left - margin.right
-      , height = 500 - margin.top - margin.bottom;
-    
-    var x = d3.scaleLinear()
-              .domain([0, d3.max(data, function(d) { return d[0]; })])
-              .range([ 0, width ]);
-    
-    var y = d3.scaleLinear()
-            .domain([0, d3.max(data, function(d) { return d[1]; })])
-            .range([ height, 0 ]);
- 
-    var chart = d3.select('#scatterplot')
-  .append('svg:svg')
-  .attr('width', width + margin.right + margin.left)
-  .attr('height', height + margin.top + margin.bottom)
-  .attr('class', 'chart')
+  var prevColor;
 
-    var main = chart.append('g')
-  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-  .attr('width', width)
-  .attr('height', height)
-  .attr('class', 'main')   
-        
-    // draw the x axis
-    var xAxis = d3.axisBottom()
-  .scale(x);
+  var padding = 15;
 
-    main.append('g')
-  .attr('transform', 'translate(0,' + height + ')')
-  .attr('class', 'main axis date')
-  .call(xAxis);
+  var svg = d3.select("#scatterplot")
+              .append("svg")
+              .attr("width", 452)
+              .attr("height",280);
 
-    // draw the y axis
-    var yAxis = d3.axisLeft()
-  .scale(y);
+  var xScale = calcXscale(padding);
 
-    main.append('g')
-  .attr('transform', 'translate(0,0)')
-  .attr('class', 'main axis date')
-  .call(yAxis);
+  var yScale = calcYscale(padding);
 
-    var g = main.append("svg:g"); 
-    
-    g.selectAll("scatter-dots")
-      .data(data)
-      .enter().append("svg:circle")
-          .attr("cx", function (d,i) { return x(d[0]); } )
-          .attr("cy", function (d) { return y(d[1]); } )
-          .attr("r", 8);
-}*/
+  var yaxis = d3.axisLeft().scale(yScale);
+  svg.append("g").attr("transform","translate(45,-0.7)").call(yaxis);  
+
+  var xaxis = d3.axisBottom().scale(xScale);
+  svg.append("g").attr("transform","translate(0,264)").call(xaxis);
+
+  var div = d3.select("body").append("div")
+              .attr("class","tooltipSca")
+              .style("opacity",1);
+
+
+  svg.selectAll("circle")
+      .data(dataset)
+      .enter().append("circle")
+      .attr("text",function(d){return d.ChampionName;})
+      .attr("r",0)
+      .attr("cx",function(d){
+                    var toReturn;
+                    switch(scatterX){
+                      case "Win Rate":
+                        toReturn =  xScale(parseFloat(d.WinGame.replace(',','.')));
+                        break;
+                      case "Damage Dealt":
+                        toReturn =  xScale(parseFloat(d.DamageChampionGame.replace(',','.')));
+                        break;
+                      case "Deaths":
+                        toReturn =  xScale(parseFloat(d.DeathGame.replace(',','.')));
+                        break;
+                      case "Assists":
+                        toReturn =  xScale(parseFloat(d.AssistGame.replace(',','.')));
+                        break;
+                      case "Minions":
+                        toReturn =  xScale(parseFloat(d.MinionGame.replace(',','.')));
+                        break;
+                      case "Gold Earned":
+                        toReturn =  xScale(parseFloat(d.GoldSpentGame.replace(',','.')));
+                        break;
+                      case "Kills":
+                        toReturn =  xScale(parseFloat(d.KillGame.replace(',','.')));
+                        break;
+                      case "Wards":
+                        toReturn =  xScale(parseFloat(d.WardsPlacedGame.replace(',','.')));
+                        break;
+                      }
+          return toReturn;
+      })
+      .attr("cy",function(d){
+                    switch(scatterY){
+                      case "Win Rate":
+                        return yScale(parseFloat(d.WinGame.replace(',','.')));
+                      case "Damage Dealt":
+                        return yScale(parseFloat(d.DamageChampionGame.replace(',','.')));
+                      case "Deaths":
+                        return yScale(parseFloat(d.DeathGame.replace(',','.')));
+                      case "Assists":
+                        return yScale(parseFloat(d.AssistGame.replace(',','.')));
+                      case "Minions":
+                        return yScale(parseFloat(d.MinionGame.replace(',','.')));
+                      case "Gold Earned":
+                        return yScale(parseFloat(d.GoldSpentGame.replace(',','.')));
+                      case "Kills":
+                        return yScale(parseFloat(d.KillGame.replace(',','.')));
+                      case "Wards":
+                        return yScale(parseFloat(d.WardsPlacedGame.replace(',','.')));
+                      }
+      })
+      .attr("fill",function(d){
+        var champAux = d.ChampionName;
+        if(topl.indexOf(champAux) >= 0 && displayTop){
+          return "#8b7426";
+        } else if(mid.indexOf(champAux) >= 0 && displayMid){
+          return "#2c408b";
+        } else if(adc.indexOf(champAux) >= 0 && displayAdc){
+          return "#000000";
+        } else if(jun.indexOf(champAux) >= 0 && displayJun){
+          return "#ffaa00";
+        } else if(sup.indexOf(champAux) >= 0 && displaySup){
+          return "#0091d3";
+        } else {
+          d3.select(this).remove();
+          return "white";
+        }
+      })
+      .on("mouseover",function(d){
+        prevColor = d3.select(this).attr("fill");
+        d3.select(this).attr("fill","rgb(160, 160, 160)");
+        div.transition().duration(250).style("opacity",1.0);
+        div.html(formatTooltipSca(d))
+          .style("left", (d3.event.pageX) + "px")   
+          .style("top", (d3.event.pageY - 30) + "px")
+          .style("background-color",prevColor);
+      })
+      .on("mouseout",function(d){
+        d3.select(this).attr("fill",prevColor);
+        div.transition().duration(100).style("opacity",0.0);
+      });
+
+      svg.selectAll("circle").transition().duration(500)
+          .attr("r",5);
+}
+
+function formatTooltipSca(d) {
+  a =  "<strong>" + d.ChampionName + "</strong><br>";
+
+  switch(scatterX){
+    case "Win Rate":
+      a += "Win Rate: " + (parseFloat(d.WinGame.replace(',','.'))*100).toFixed(2) +"%";
+      break;
+    case "Damage Dealt":
+      a += "Damage Dealt: " + parseFloat(d.DamageChampionGame.replace(',','.')).toFixed(2);
+      break;
+    case "Deaths":
+      a += "Deaths: " + parseFloat(d.DeathGame.replace(',','.')).toFixed(2);
+      break;
+    case "Assists":
+      a += "Assists: " + parseFloat(d.AssistGame.replace(',','.')).toFixed(2);
+      break;
+    case "Minions":
+      a += "Minions: " + parseFloat(d.MinionGame.replace(',','.')).toFixed(2);
+      break;
+    case "Gold Earned":
+      a += "Gold Earned: " + parseFloat(d.GoldSpentGame.replace(',','.')).toFixed(2);
+      break;
+    case "Kills":
+      a += "Kills: " + parseFloat(d.KillGame.replace(',','.')).toFixed(2);
+      break;
+    case "Wards":
+      a += "Wards: " + parseFloat(d.WardsPlacedGame.replace(',','.')).toFixed(2);
+      break;
+  }
+
+  a += "<br>";
+
+  switch(scatterY){
+    case "Win Rate":
+      a += "Win Rate: " + (parseFloat(d.WinGame.replace(',','.'))*100).toFixed(2) +"%";
+      break;
+    case "Damage Dealt":
+      a += "Damage Dealt: " + parseFloat(d.DamageChampionGame.replace(',','.')).toFixed(2);
+      break;
+    case "Deaths":
+      a += "Deaths: " + parseFloat(d.DeathGame.replace(',','.')).toFixed(2);
+      break;
+    case "Assists":
+      a += "Assists: " + parseFloat(d.AssistGame.replace(',','.')).toFixed(2);
+      break;
+    case "Minions":
+      a += "Minions: " + parseFloat(d.MinionGame.replace(',','.')).toFixed(2);
+      break;
+    case "Gold Earned":
+      a += "Gold Earned: " + parseFloat(d.GoldSpentGame.replace(',','.')).toFixed(2);
+      break;
+    case "Kills":
+      a += "Kills: " + parseFloat(d.KillGame.replace(',','.')).toFixed(2);
+      break;
+    case "Wards":
+      a += "Wards: " + parseFloat(d.WardsPlacedGame.replace(',','.')).toFixed(2);
+      break;
+  }
+
+  return a;
+}

@@ -633,6 +633,19 @@ input:checked + .slider:before {
 #scatterplot {
 	width: 452px;
 	height: 280px;
-	position: absolute;
+ 	position: absolute;
 	top: 347px;
+}
+
+div.tooltipSca {	
+    position: absolute;			
+    text-align: center;			
+    width: 150px;					
+    height: 42px;					
+    padding: 2px;				
+    font: 12px Arial;		
+    background: lightsteelblue;	
+    border: 1px solid black;		
+    pointer-events: none;
+    color: white;			
 }
