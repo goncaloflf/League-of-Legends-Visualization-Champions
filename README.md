@@ -24,9 +24,9 @@ Here is a short list of the technologies used in this project:
 
 Our visualization was crafted for Mozilla Firefox 50.1.0.
 
-1 - If you don't have it, download it from [here](https://download.mozilla.org/?product=firefox-50.1.0-SSL&os=win&lang=en-GB).
-2 - Download and extract the [source code](https://github.com/goncaloflf/InfoVis/archive/master.zip).
-3 - Open index.html with Firefox, and it's on!
+1. If you don't have it, download it from [here](https://download.mozilla.org/?product=firefox-50.1.0-SSL&os=win&lang=en-GB).
+2. Download and extract the [source code](https://github.com/goncaloflf/InfoVis/archive/master.zip).
+3. Open index.html with Firefox, and it's on!
 
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
